@@ -7,6 +7,7 @@
      "accessor.KeyBindingAccessor",
      "accessor.MinecraftAccessor",
      "accessor.ShaderGroupAccessor",
+     "block.MixinBlock",
 	 "client.MixinMinecraft",
 	 "entity.MixinEntity",
 	 "entity.MixinEntityPlayerSP",
