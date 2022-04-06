@@ -1,4 +1,4 @@
-package nightmare.utils;
+package nightmare.utils.render;
 
 import java.awt.Color;
 

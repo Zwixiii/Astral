@@ -8,11 +8,13 @@ import nightmare.Nightmare;
 import nightmare.event.EventTarget;
 import nightmare.event.impl.EventRender2D;
 import nightmare.fonts.impl.Fonts;
+import nightmare.gui.notification.NotificationManager;
 import nightmare.gui.window.Window;
 import nightmare.module.Category;
 import nightmare.module.Module;
 import nightmare.settings.Setting;
 import nightmare.utils.ColorUtils;
+import nightmare.utils.ScreenUtils;
 
 public class HUD extends Module{
 
@@ -24,6 +26,7 @@ public class HUD extends Module{
 		Nightmare.instance.settingsManager.rSetting(new Setting("ActiveMods", this, true));
 		Nightmare.instance.settingsManager.rSetting(new Setting("ClientName", this, false));
 		Nightmare.instance.settingsManager.rSetting(new Setting("Inventory", this, true));
+		Nightmare.instance.settingsManager.rSetting(new Setting("Notification", this, true));
 		Nightmare.instance.settingsManager.rSetting(new Setting("Red", this, 0, 0, 255, true));
 		Nightmare.instance.settingsManager.rSetting(new Setting("Green", this, 210, 0, 255, true));
 		Nightmare.instance.settingsManager.rSetting(new Setting("Blue", this, 255, 0, 255, true));
@@ -39,6 +42,10 @@ public class HUD extends Module{
 			Gui.drawRect(8, 8, 8 + stringWidth, 8 + 13, new Color(25, 25, 25).getRGB());
 			Gui.drawRect(8, 8 + 12, 8 + stringWidth, 8 + 13, ColorUtils.getClientColor());
 			Fonts.REGULAR.REGULAR_18.REGULAR_18.drawString(title, 8 + 3, 8 + 3, -1, true);
+		}
+		
+		if(Nightmare.instance.settingsManager.getSettingByName(this, "Notification").getValBoolean()) {
+			NotificationManager.doRender(ScreenUtils.getWidth(), ScreenUtils.getHeight());
 		}
 		
 		for(Window window : Nightmare.instance.windowManager.getWindows()) {

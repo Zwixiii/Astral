@@ -5,7 +5,11 @@ import java.util.concurrent.ThreadLocalRandom;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityArmorStand;
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
 import nightmare.Nightmare;
 import nightmare.event.EventTarget;
@@ -44,6 +48,10 @@ public class LegitAura extends Module {
         
         if(target != null) {
         	
+            if(target.getName().equals(mc.thePlayer.getName())) {
+            	return;
+            }
+            
         	this.faceTarget(target, horizontalSpeed, verticalSpeed);
         	
         	if(mc.objectMouseOver != null && mc.objectMouseOver.entityHit != null) {
@@ -84,9 +92,10 @@ public class LegitAura extends Module {
     }
 
     private boolean canAttack(EntityLivingBase player) {
-        if (player instanceof EntityVillager)
-            return true;
-        if(player.isOnSameTeam(mc.thePlayer) && Nightmare.instance.settingsManager.getSettingByName(this, "Teams").getValBoolean())
+    	if(player instanceof EntityVillager || player instanceof EntityArmorStand || player instanceof EntityAnimal || player instanceof EntityMob 
+    			|| player.getDisplayName().getFormattedText().contains("[NPC]") || player.getName().contains("#") || !player.getName().toLowerCase().contains("shop"))
+    		return false;
+        if(Nightmare.instance.settingsManager.getSettingByName(this, "Teams").getValBoolean() && player.getDisplayName().getFormattedText().startsWith("\u00a7" + mc.thePlayer.getDisplayName().getFormattedText().charAt(1)))
             return false;
         if(player.isInvisible() && !Nightmare.instance.settingsManager.getSettingByName(this, "Invisibles").getValBoolean())
             return false;

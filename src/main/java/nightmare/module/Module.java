@@ -1,7 +1,9 @@
 package nightmare.module;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.util.EnumChatFormatting;
 import nightmare.Nightmare;
+import nightmare.gui.notification.NotificationManager;
 
 public class Module {
 	
@@ -38,9 +40,11 @@ public class Module {
         onToggle();
         if(toggled) {
             onEnable();
+            NotificationManager.show("Module", EnumChatFormatting.GREEN + "Enable " + EnumChatFormatting.WHITE + name, 2500);
         }
         else {
             onDisable();
+            NotificationManager.show("Module", EnumChatFormatting.RED + "Disable " + EnumChatFormatting.WHITE + name, 2500);
         }
         if(Nightmare.instance.fileManager != null) {
         	Nightmare.instance.fileManager.getConfigManager().save();

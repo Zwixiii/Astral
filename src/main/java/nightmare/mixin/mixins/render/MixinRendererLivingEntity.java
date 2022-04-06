@@ -16,7 +16,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityArmorStand;
 import net.minecraft.entity.passive.EntityBat;
 import nightmare.Nightmare;
-import nightmare.utils.OutlineUtils;
+import nightmare.utils.render.OutlineUtils;
 
 @Mixin(RendererLivingEntity.class)
 public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> extends MixinRender<T>{

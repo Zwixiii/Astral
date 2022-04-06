@@ -1,5 +1,8 @@
 package nightmare.mixin.mixins.client;
 
+import java.io.IOException;
+
+import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -9,9 +12,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.Session;
+import net.minecraftforge.fml.repackage.com.nothome.delta.Delta;
 import nightmare.Nightmare;
 import nightmare.event.impl.EventKey;
 import nightmare.event.impl.EventTick;
+import nightmare.gui.notification.Notification;
 import nightmare.hooks.MinecraftHook;
 
 @Mixin(Minecraft.class)
@@ -26,6 +31,9 @@ public class MixinMinecraft{
 	@Shadow
 	private int leftClickCounter;
 	
+    long lastFrame = getTime();
+    long getTime() { return (Sys.getTime() * 1000) / Sys.getTimerResolution(); }
+    
     @Inject(method = "startGame", at = @At(value = "FIELD", target = "Lnet/minecraft/client/Minecraft;ingameGUI:Lnet/minecraft/client/gui/GuiIngame;", shift = At.Shift.AFTER))
     private void startGame(CallbackInfo ci) {
     	Nightmare.instance.startClient();	
@@ -65,5 +73,13 @@ public class MixinMinecraft{
     @Inject(method = "setIngameFocus", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/MouseHelper;grabMouseCursor()V"))
     private void setIngameFocus(CallbackInfo ci) {
         MinecraftHook.updateKeyBindState();
+    }
+    
+    @Inject(method = "runGameLoop", at = @At("HEAD"))
+    private void runGameLoop(CallbackInfo ci){
+        long currentTime = getTime();
+        int deltaTime = (int) (currentTime - lastFrame);
+        lastFrame = currentTime;
+        Notification.delta = deltaTime;
     }
 }
