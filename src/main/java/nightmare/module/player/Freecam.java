@@ -70,7 +70,8 @@ public class Freecam extends Module{
 	@Override
 	public void onEnable() {
 		
-		if(mc.thePlayer == null || mc.theWorld == null) {
+		if(mc.thePlayer == null || mc.theWorld == null || Nightmare.instance.moduleManager.getModuleByName("Blink").isToggled()) {
+			this.setToggled(false);
 			return;
 		}
 		
@@ -91,6 +92,11 @@ public class Freecam extends Module{
 	
 	@Override
 	public void onDisable() {
+		
+		if(mc.thePlayer == null || mc.theWorld == null) {
+			return;
+		}
+		
         mc.thePlayer.capabilities.isCreativeMode = false;
         mc.thePlayer.noClip = false;
         mc.thePlayer.capabilities.isFlying = false;

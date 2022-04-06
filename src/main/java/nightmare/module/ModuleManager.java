@@ -26,6 +26,7 @@ import nightmare.module.player.InvManager;
 import nightmare.module.render.Chams;
 import nightmare.module.render.Chat;
 import nightmare.module.render.ClickGUI;
+import nightmare.module.render.ESP;
 import nightmare.module.render.Fullbright;
 import nightmare.module.render.HUD;
 import nightmare.module.render.MotionBlur;
@@ -68,6 +69,7 @@ public class ModuleManager {
     	modules.add(new Chams());
     	modules.add(new Chat());
     	modules.add(new ClickGUI());
+    	modules.add(new ESP());
     	modules.add(new Fullbright());
     	modules.add(new HUD());
     	modules.add(new MotionBlur());

@@ -18,6 +18,7 @@
 	 "render.MixinEntityRenderer",
 	 "render.MixinFontRenderer",
 	 "render.MixinInventoryEffectRenderer",
+	 "render.MixinRender",
 	 "render.MixinRendererLivingEntity",
 	 "render.MixinRenderItem",
 	 "render.MixinTileEntityChestRenderer",
