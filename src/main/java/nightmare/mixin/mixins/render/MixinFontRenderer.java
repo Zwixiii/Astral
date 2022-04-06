@@ -22,4 +22,16 @@ public class MixinFontRenderer {
     	
     	return event.getOutputText();
     }
+    
+    @ModifyVariable(method = "getStringWidth", at = @At("HEAD"), ordinal = 0)
+    private String getStringWidth(String text) {
+    	if(text == null || Nightmare.instance.eventManager == null) {
+    		return text;
+    	}
+    	
+    	EventText event = new EventText(text);
+    	event.call();
+    	
+    	return event.getOutputText();
+    }
 }
