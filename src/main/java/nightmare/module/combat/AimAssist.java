@@ -10,7 +10,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityArmorStand;
 import net.minecraft.entity.item.EntityItemFrame;
-import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityVillager;
@@ -19,7 +18,6 @@ import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import nightmare.Nightmare;
@@ -28,6 +26,7 @@ import nightmare.event.impl.EventTick;
 import nightmare.module.Category;
 import nightmare.module.Module;
 import nightmare.settings.Setting;
+import nightmare.utils.RotationUtils;
 
 public class AimAssist extends Module{
 
@@ -78,7 +77,7 @@ public class AimAssist extends Module{
 				double yawdistance;
 				float yaw;
 				Entity en = (Entity) e;
-				if (en == mc.thePlayer || !this.isValid(en) || !(maxDistance > (yawdistance = getDistanceBetweenAngles(yaw = getAngles(en)[1], mc.thePlayer.rotationYaw)))) {
+				if (en == mc.thePlayer || !this.isValid(en) || !(maxDistance > (yawdistance = getDistanceBetweenAngles(yaw = RotationUtils.getAngles(en)[1], mc.thePlayer.rotationYaw)))) {
 					continue;
 				}
 				entity = en;
@@ -91,8 +90,8 @@ public class AimAssist extends Module{
     			
 				double horizontalSpeed = Nightmare.instance.settingsManager.getSettingByName(this, "Horizontal").getValDouble() * 3.0 + (Nightmare.instance.settingsManager.getSettingByName(this, "Horizontal").getValDouble() > 0.0 ? this.rand.nextDouble() : 0.0);
 				double verticalSpeed = Nightmare.instance.settingsManager.getSettingByName(this, "Vertical").getValDouble() * 3.0 + (Nightmare.instance.settingsManager.getSettingByName(this, "Vertical").getValDouble() > 0.0 ? this.rand.nextDouble() : 0.0);
-    			float yaw = getAngles(entity)[1];
-    			float pitch = getAngles(entity)[0];
+    			float yaw = RotationUtils.getAngles(entity)[1];
+    			float pitch = RotationUtils.getAngles(entity)[0];
     			double yawdistance = getDistanceBetweenAngles(yaw, mc.thePlayer.rotationYaw);
     			double pitchdistance = getDistanceBetweenAngles(pitch, mc.thePlayer.rotationPitch);
     			if (pitchdistance <= maxAngle && yawdistance >= minAngle && yawdistance <= maxAngle) {
@@ -118,41 +117,13 @@ public class AimAssist extends Module{
 		}
 		return distance;
 	}
-	
-	protected float getRotation(float currentRotation, float targetRotation, float maxIncrement) {
-		float deltaAngle = MathHelper.wrapAngleTo180_float(targetRotation - currentRotation);
-		if (deltaAngle > maxIncrement) {
-			deltaAngle = maxIncrement;
-		}
-		if (deltaAngle < -maxIncrement) {
-			deltaAngle = -maxIncrement;
-		}
-		return currentRotation + deltaAngle / 2.0f;
-	}
 
 	private void faceTarget(Entity target, float yawspeed, float pitchspeed) {
 		EntityPlayerSP player = mc.thePlayer;
-		float yaw = getAngles(target)[1];
-		float pitch = getAngles(target)[0];
-		player.rotationYaw = this.getRotation(player.rotationYaw, yaw, yawspeed);
-		player.rotationPitch = this.getRotation(player.rotationPitch, pitch, pitchspeed);
-	}
-
-	public static float[] getAngles(Entity entity) {
-		double x = entity.posX - mc.thePlayer.posX;
-		double z = entity.posZ - mc.thePlayer.posZ;
-		double y = entity instanceof EntityEnderman ? entity.posY - mc.thePlayer.posY
-				: entity.posY + ((double) entity.getEyeHeight() - 1.9) - mc.thePlayer.posY
-						+ ((double) mc.thePlayer.getEyeHeight() - 1.9);
-		double helper = MathHelper.sqrt_double(x * x + z * z);
-		float newYaw = (float) Math.toDegrees(-Math.atan(x / z));
-		float newPitch = (float) (-Math.toDegrees(Math.atan(y / helper)));
-		if (z < 0.0 && x < 0.0) {
-			newYaw = (float) (90.0 + Math.toDegrees(Math.atan(z / x)));
-		} else if (z < 0.0 && x > 0.0) {
-			newYaw = (float) (-90.0 + Math.toDegrees(Math.atan(z / x)));
-		}
-		return new float[] { newPitch, newYaw };
+		float yaw = RotationUtils.getAngles(target)[1];
+		float pitch = RotationUtils.getAngles(target)[0];
+		player.rotationYaw = RotationUtils.getRotation(player.rotationYaw, yaw, yawspeed);
+		player.rotationPitch = RotationUtils.getRotation(player.rotationPitch, pitch, pitchspeed);
 	}
 	
 	public static Entity getEntity(double distance) {
