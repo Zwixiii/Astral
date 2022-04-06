@@ -6,6 +6,7 @@ import net.minecraft.network.play.client.C0EPacketClickWindow;
 import net.minecraft.network.play.server.S02PacketChat;
 import nightmare.Nightmare;
 import nightmare.event.EventTarget;
+import nightmare.event.impl.EventLoadWorld;
 import nightmare.event.impl.EventReceivePacket;
 import nightmare.event.impl.EventSendPacket;
 import nightmare.event.impl.EventUpdate;
@@ -37,24 +38,34 @@ public class AutoHypixel extends Module{
 		
 		int delay = (int) Nightmare.instance.settingsManager.getSettingByName(this, "Delay").getValDouble();
 		
-		if(this.autoplay == true) {
-			if(notification == true) {
-				notification = false;
+		if(Nightmare.instance.settingsManager.getSettingByName(this, "AutoGG").getValBoolean()) {
+			if(this.autogg == true) {
+				mc.thePlayer.sendChatMessage("/achat gg");
+				this.autogg = false;
 			}
-			if(timer.delay(1000 * delay)) {
-				mc.thePlayer.sendChatMessage(playCommand);
-				timer.reset();
-				this.autoplay = false;
-				notification = true;
-			}
-		}else {
-			timer.reset();
 		}
 		
-		if(this.autogg == true) {
-			mc.thePlayer.sendChatMessage("/achat gg");
-			this.autogg = false;
-		}
+		if(Nightmare.instance.settingsManager.getSettingByName(this, "AutoPlay").getValBoolean()) {
+			if(this.autoplay == true) {
+				if(notification == true) {
+					notification = false;
+				}
+				if(timer.delay(1000 * delay)) {
+					mc.thePlayer.sendChatMessage(playCommand);
+					timer.reset();
+					this.autoplay = false;
+					notification = true;
+				}
+			}else {
+				timer.reset();
+			}
+		}	
+	}
+	
+	@EventTarget
+	public void onLoadWorld(EventLoadWorld event) {
+		this.autoplay = false;
+		this.autogg = false;
 	}
 	
     @EventTarget
