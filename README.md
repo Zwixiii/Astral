@@ -1,13 +1,12 @@
-  <h3>Join the discord!: https://discord.gg/SFYKRhbx</h3>
-
-# What is Nightmare?
-A free and open source Legit hack client for Minecraft! :)
+# Moonlight
+Free and OpenSource Minecraft Ghost Client(Forge)
 # Credits
-- [ClickGUI(Base)](https://masterof13fps.com/forum/index.php?threads/lemon-clickgui-with-herocode-settings.5419/)
-- [CommandManager](https://youtu.be/o8fuBYUB6cI)
-- [Module,SettingManager](https://www.youtube.com/c/Herocode/featured)
+- [ClickGUI(Base) - LemonClickGUI](https://masterof13fps.com/forum/index.php?threads/lemon-clickgui-with-herocode-settings.5419/)
+- [Module,SettingManager, EventManager - HeroCode](https://www.youtube.com/c/Herocode/featured)
+- [Patcher - Sk1erLLC](https://github.com/Sk1erLLC/Patcher)
+- [BetterChat - LlamaLad7](https://github.com/LlamaLad7/Better-Chat/tree/1.8.9)
+- [NoPotionShift(Prevent-Potion-Shift) - MasonD3V](https://github.com/MasonD3V/MCP-Prevent-Potion-Shift)
+- [MotionBlur(Sol-Client) - TheKodeToad](https://github.com/Sol-Client/Client)
 # Libraries
-- [fastutil](https://github.com/vigna/fastutil)
-- [openauth](https://github.com/AnshGulavani/MCP-Snippets/blob/main/Utils/Microsoft%20Auth/openauth-1.1.2.jar)
-- [Lombok](https://projectlombok.org/)
-- [Downloaded jar library files](https://www.mediafire.com/file/cmh3yre6ylh1adk/lib.zip/file)
+- [fastutil - vigna](https://github.com/vigna/fastutil)
+- [Mixin - SpongePowered](https://github.com/SpongePowered/Mixin)

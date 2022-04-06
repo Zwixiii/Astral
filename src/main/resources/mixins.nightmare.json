@@ -1,0 +1,24 @@
+{
+  "required": true,
+  "package": "nightmare.mixin.mixins",
+  "refmap": "mixins.nightmare.refmap.json",
+  "compatibilityLevel": "JAVA_8",
+  "client": [
+     "accessor.KeyBindingAccessor",
+     "accessor.MinecraftAccessor",
+     "accessor.ShaderGroupAccessor",
+	 "client.MixinMinecraft",
+	 "entity.MixinEntity",
+	 "entity.MixinEntityPlayerSP",
+	 "gui.MixinGuiIngame",
+	 "gui.MixinGuiNewChat",
+	 "network.MixinNetworkManager",
+	 "render.MixinEntityRenderer",
+	 "render.MixinFontRenderer",
+	 "render.MixinInventoryEffectRenderer",
+	 "render.MixinRendererLivingEntity",
+	 "render.MixinRenderItem",
+	 "render.MixinTileEntityChestRenderer",
+	 "world.MixinWorldInfo"
+  ]
+}
