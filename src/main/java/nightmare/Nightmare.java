@@ -15,7 +15,7 @@ public class Nightmare {
 	
 	public static Nightmare instance = new Nightmare();
 	
-	private String name = "Nightmare", version = "1.3";
+	private String name = "Nightmare", version = "1.4";
 	
 	public SettingsManager settingsManager;
 	public EventManager eventManager;
