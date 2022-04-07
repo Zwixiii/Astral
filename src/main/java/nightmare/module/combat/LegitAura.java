@@ -8,10 +8,6 @@ import org.lwjgl.input.Keyboard;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityArmorStand;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.item.ItemSword;
 import net.minecraft.network.play.client.C07PacketPlayerDigging;
 import net.minecraft.network.play.client.C08PacketPlayerBlockPlacement;
@@ -63,7 +59,7 @@ public class LegitAura extends Module {
     	float horizontalSpeed = (float) Nightmare.instance.settingsManager.getSettingByName(this, "Horizontal").getValDouble();
     	float verticalSpeed = (float) Nightmare.instance.settingsManager.getSettingByName(this, "Vertical").getValDouble();
     	String mode = Nightmare.instance.settingsManager.getSettingByName(this, "Mode").getValString();
-    	
+
         target = getClosest(Nightmare.instance.settingsManager.getSettingByName(this, "Range").getValDouble());
         
         if(target != null) {
@@ -73,10 +69,9 @@ public class LegitAura extends Module {
             }
             
             if (Nightmare.instance.settingsManager.getSettingByName(this, "AutoBlock").getValBoolean() && mc.thePlayer.getCurrentEquippedItem() != null && mc.thePlayer.getCurrentEquippedItem().getItem() instanceof ItemSword) {
-                if((Keyboard.isKeyDown(mc.gameSettings.keyBindSprint.getKeyCode()) || Nightmare.instance.moduleManager.getModuleByName("Sprint").isToggled()) && !mc.thePlayer.isSprinting()) {
+                if((Keyboard.isKeyDown(mc.gameSettings.keyBindSprint.getKeyCode()) || Nightmare.instance.moduleManager.getModuleByName("Sprint").isToggled()) && mc.thePlayer.movementInput.moveForward != 0) {
                 	mc.thePlayer.setSprinting(true);
                 }
-            	mc.playerController.sendUseItem(mc.thePlayer, mc.theWorld, mc.thePlayer.inventory.getCurrentItem());
             	if(mode.equals("Hypixel")) {
                     if (mc.thePlayer.swingProgressInt == -1) {
                         mc.thePlayer.sendQueue.getNetworkManager().sendPacket(new C07PacketPlayerDigging(C07PacketPlayerDigging.Action.RELEASE_USE_ITEM, new BlockPos(-1, -1, -1), EnumFacing.DOWN));
@@ -100,7 +95,9 @@ public class LegitAura extends Module {
 
     @EventTarget
     public void onSlowDown(EventSlowDown event) {
-    	event.setCancelled(true);
+    	if (Nightmare.instance.settingsManager.getSettingByName(this, "AutoBlock").getValBoolean()){
+        	event.setCancelled(true);
+    	}
     }
     
     @EventTarget
@@ -139,9 +136,7 @@ public class LegitAura extends Module {
     }
 
     private boolean canAttack(EntityLivingBase player) {
-    	if(player instanceof EntityVillager || player instanceof EntityArmorStand || player instanceof EntityAnimal || player instanceof EntityMob 
-    			|| player.getDisplayName().getFormattedText().contains("[NPC]") || player.getName().contains("#") || !player.getName().toLowerCase().contains("shop"))
-    		return false;
+
         if(Nightmare.instance.settingsManager.getSettingByName(this, "Teams").getValBoolean() && player.getDisplayName().getFormattedText().startsWith("\u00a7" + mc.thePlayer.getDisplayName().getFormattedText().charAt(1)))
             return false;
         if(player.isInvisible() && !Nightmare.instance.settingsManager.getSettingByName(this, "Invisibles").getValBoolean())
