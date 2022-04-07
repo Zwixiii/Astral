@@ -16,12 +16,15 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.network.play.client.C07PacketPlayerDigging;
 import net.minecraft.network.play.client.C08PacketPlayerBlockPlacement;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MathHelper;
 import nightmare.Nightmare;
 import nightmare.event.EventTarget;
+import nightmare.event.impl.EventLoadWorld;
 import nightmare.event.impl.EventPreMotionUpdate;
 import nightmare.event.impl.EventSlowDown;
+import nightmare.gui.notification.NotificationManager;
 import nightmare.module.Category;
 import nightmare.module.Module;
 import nightmare.settings.Setting;
@@ -42,6 +45,7 @@ public class LegitAura extends Module {
 		options.add("Hypixel");
 		
         Nightmare.instance.settingsManager.rSetting(new Setting("AutoBlock", this, false));
+        Nightmare.instance.settingsManager.rSetting(new Setting("AutoDisable", this, false));
 		Nightmare.instance.settingsManager.rSetting(new Setting("Mode", this, "Vanilla", options));
 		Nightmare.instance.settingsManager.rSetting(new Setting("Horizontal", this, 4.2, 0, 20, false));
 		Nightmare.instance.settingsManager.rSetting(new Setting("Vertical", this, 2.4, 0, 20, false));
@@ -97,6 +101,14 @@ public class LegitAura extends Module {
     @EventTarget
     public void onSlowDown(EventSlowDown event) {
     	event.setCancelled(true);
+    }
+    
+    @EventTarget
+    public void onLoadWold(EventLoadWorld event) {
+    	if(Nightmare.instance.settingsManager.getSettingByName(this, "AutoDisable").getValBoolean()) {
+    		this.setToggled(false);
+    		NotificationManager.show("Module", EnumChatFormatting.RED + "Disable " + EnumChatFormatting.WHITE + "(AutoDisable)" + " " + this.getName(), 2500);
+    	}
     }
     
 	private void faceTarget(Entity target, float yawspeed, float pitchspeed) {
