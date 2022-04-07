@@ -31,14 +31,7 @@ public class LegitAura extends Module {
     
     public LegitAura() {
         super("LegitAura", 0, Category.COMBAT);
-        
-		ArrayList<String> options = new ArrayList<>();
-		
-		options.add("Vanilla");
-		options.add("Hypixel");
-		
-        Nightmare.instance.settingsManager.rSetting(new Setting("AutoBlock", this, false));
-		Nightmare.instance.settingsManager.rSetting(new Setting("Mode", this, "Vanilla", options));
+
         Nightmare.instance.settingsManager.rSetting(new Setting("AutoDisable", this, false));
 		Nightmare.instance.settingsManager.rSetting(new Setting("Horizontal", this, 4.2, 0, 20, false));
 		Nightmare.instance.settingsManager.rSetting(new Setting("Vertical", this, 2.4, 0, 20, false));
@@ -55,7 +48,6 @@ public class LegitAura extends Module {
     	
     	float horizontalSpeed = (float) Nightmare.instance.settingsManager.getSettingByName(this, "Horizontal").getValDouble();
     	float verticalSpeed = (float) Nightmare.instance.settingsManager.getSettingByName(this, "Vertical").getValDouble();
-    	String mode = Nightmare.instance.settingsManager.getSettingByName(this, "Mode").getValString();
     	
         target = getClosest(Nightmare.instance.settingsManager.getSettingByName(this, "Range").getValDouble());
         
@@ -64,17 +56,6 @@ public class LegitAura extends Module {
             if(target.getName().equals(mc.thePlayer.getName())) {
             	return;
             }
-            
-            if (Nightmare.instance.settingsManager.getSettingByName(this, "AutoBlock").getValBoolean() && mc.thePlayer.getCurrentEquippedItem() != null && mc.thePlayer.getCurrentEquippedItem().getItem() instanceof ItemSword) {
-            	if(mode.equals("Hypixel")) {
-                    if (mc.thePlayer.swingProgressInt == -1) {
-                        mc.thePlayer.sendQueue.getNetworkManager().sendPacket(new C07PacketPlayerDigging(C07PacketPlayerDigging.Action.RELEASE_USE_ITEM, new BlockPos(-1, -1, -1), EnumFacing.DOWN));
-                    } else if (mc.thePlayer.swingProgressInt == 0) {
-                    	mc.thePlayer.sendQueue.getNetworkManager().sendPacket(new C08PacketPlayerBlockPlacement(new BlockPos(-1, -1, -1), 255, mc.thePlayer.getHeldItem(), 0, 0, 0));
-                    }
-            	}
-            }
-            
         	this.faceTarget(target, horizontalSpeed, verticalSpeed);
         	
         	if(mc.objectMouseOver != null && mc.objectMouseOver.entityHit != null) {

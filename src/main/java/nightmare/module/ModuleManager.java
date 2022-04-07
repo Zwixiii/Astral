@@ -25,7 +25,6 @@ import nightmare.module.player.AutoTool;
 import nightmare.module.player.FastPlace;
 import nightmare.module.player.Freecam;
 import nightmare.module.player.InvManager;
-import nightmare.module.player.NoSlow;
 import nightmare.module.render.Chams;
 import nightmare.module.render.Chat;
 import nightmare.module.render.ClickGUI;
@@ -69,7 +68,6 @@ public class ModuleManager {
     	modules.add(new FastPlace());
     	modules.add(new Freecam());
     	modules.add(new InvManager());
-    	modules.add(new NoSlow());
     	
     	//Render
     	modules.add(new Chams());
