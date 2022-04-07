@@ -40,9 +40,9 @@ public class LegitAura extends Module {
 		options.add("Vanilla");
 		options.add("Hypixel");
 		
-        Nightmare.instance.settingsManager.rSetting(new Setting("AutoBlock", this, false));
-        Nightmare.instance.settingsManager.rSetting(new Setting("AutoDisable", this, false));
+        Nightmare.instance.settingsManager.rSetting(new Setting("Block", this, false));
 		Nightmare.instance.settingsManager.rSetting(new Setting("Mode", this, "Vanilla", options));
+        Nightmare.instance.settingsManager.rSetting(new Setting("AutoDisable", this, false));
 		Nightmare.instance.settingsManager.rSetting(new Setting("Horizontal", this, 4.2, 0, 20, false));
 		Nightmare.instance.settingsManager.rSetting(new Setting("Vertical", this, 2.4, 0, 20, false));
 		Nightmare.instance.settingsManager.rSetting(new Setting("MinCPS", this, 12, 1, 20, false));
@@ -59,7 +59,7 @@ public class LegitAura extends Module {
     	float horizontalSpeed = (float) Nightmare.instance.settingsManager.getSettingByName(this, "Horizontal").getValDouble();
     	float verticalSpeed = (float) Nightmare.instance.settingsManager.getSettingByName(this, "Vertical").getValDouble();
     	String mode = Nightmare.instance.settingsManager.getSettingByName(this, "Mode").getValString();
-
+    	
         target = getClosest(Nightmare.instance.settingsManager.getSettingByName(this, "Range").getValDouble());
         
         if(target != null) {
@@ -68,7 +68,7 @@ public class LegitAura extends Module {
             	return;
             }
             
-            if (Nightmare.instance.settingsManager.getSettingByName(this, "AutoBlock").getValBoolean() && mc.thePlayer.getCurrentEquippedItem() != null && mc.thePlayer.getCurrentEquippedItem().getItem() instanceof ItemSword) {
+            if (Nightmare.instance.settingsManager.getSettingByName(this, "Block").getValBoolean() && mc.thePlayer.getCurrentEquippedItem() != null && mc.thePlayer.getCurrentEquippedItem().getItem() instanceof ItemSword) {
                 if((Keyboard.isKeyDown(mc.gameSettings.keyBindSprint.getKeyCode()) || Nightmare.instance.moduleManager.getModuleByName("Sprint").isToggled()) && mc.thePlayer.movementInput.moveForward != 0) {
                 	mc.thePlayer.setSprinting(true);
                 }
