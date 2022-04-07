@@ -15,15 +15,7 @@ public class Sprint extends Module{
 	
 	@EventTarget
 	public void onUpdate(EventUpdate event) {
-		if(Nightmare.instance.moduleManager.getModuleByName("NoSlow").isToggled()) {
-			if(mc.thePlayer.isUsingItem() && mc.thePlayer.moveForward > 0) {
-				mc.thePlayer.setSprinting(true);
-			}else {
-				KeyBinding.setKeyBindState(mc.gameSettings.keyBindSprint.getKeyCode(), true);
-			}
-		}else {
-			KeyBinding.setKeyBindState(mc.gameSettings.keyBindSprint.getKeyCode(), true);
-		}
+		KeyBinding.setKeyBindState(mc.gameSettings.keyBindSprint.getKeyCode(), true);
 	}
 	
 	@Override

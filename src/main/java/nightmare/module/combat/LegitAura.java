@@ -1,17 +1,17 @@
 package nightmare.module.combat;
 
-import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityArmorStand;
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemSword;
-import net.minecraft.network.play.client.C07PacketPlayerDigging;
-import net.minecraft.network.play.client.C08PacketPlayerBlockPlacement;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MathHelper;
 import nightmare.Nightmare;
 import nightmare.event.EventTarget;
@@ -33,8 +33,9 @@ public class LegitAura extends Module {
         super("LegitAura", 0, Category.COMBAT);
 
         Nightmare.instance.settingsManager.rSetting(new Setting("AutoDisable", this, false));
-		Nightmare.instance.settingsManager.rSetting(new Setting("Horizontal", this, 4.2, 0, 20, false));
-		Nightmare.instance.settingsManager.rSetting(new Setting("Vertical", this, 2.4, 0, 20, false));
+        Nightmare.instance.settingsManager.rSetting(new Setting("HeldItem", this, false));
+		Nightmare.instance.settingsManager.rSetting(new Setting("Horizontal", this, 12, 0, 20, false));
+		Nightmare.instance.settingsManager.rSetting(new Setting("Vertical", this, 8, 0, 20, false));
 		Nightmare.instance.settingsManager.rSetting(new Setting("MinCPS", this, 12, 1, 20, false));
 		Nightmare.instance.settingsManager.rSetting(new Setting("MaxCPS", this, 15, 1, 20, false));
 		Nightmare.instance.settingsManager.rSetting(new Setting("Range", this, 4.2, 1.0, 8.0, false));
@@ -56,15 +57,18 @@ public class LegitAura extends Module {
             if(target.getName().equals(mc.thePlayer.getName())) {
             	return;
             }
-        	this.faceTarget(target, horizontalSpeed, verticalSpeed);
-        	
-        	if(mc.objectMouseOver != null && mc.objectMouseOver.entityHit != null) {
-                if (timer.delay(1000 / ThreadLocalRandom.current().nextInt((int) Nightmare.instance.settingsManager.getSettingByName(this, "MinCPS").getValDouble(), (int) Nightmare.instance.settingsManager.getSettingByName(this, "MaxCPS").getValDouble() + 1))) {
+            
+            if (!Nightmare.instance.settingsManager.getSettingByName(this, "HeldItem").getValBoolean() || mc.thePlayer.getHeldItem() != null && (mc.thePlayer.getHeldItem().getItem() instanceof ItemAxe || mc.thePlayer.getHeldItem().getItem() instanceof ItemSword)) {
+            	this.faceTarget(target, horizontalSpeed, verticalSpeed);
+            	
+            	if (timer.delay(1000 / ThreadLocalRandom.current().nextInt((int) Nightmare.instance.settingsManager.getSettingByName(this, "MinCPS").getValDouble(), (int) Nightmare.instance.settingsManager.getSettingByName(this, "MaxCPS").getValDouble() + 1))) {
                     mc.thePlayer.swingItem();
-                    mc.playerController.attackEntity(mc.thePlayer, target);
+                	if(mc.objectMouseOver != null && mc.objectMouseOver.entityHit != null) {
+                        mc.playerController.attackEntity(mc.thePlayer, target);
+                	}
                     timer.reset();
-                }
-        	}
+            	}
+            }
         }
     }
     
@@ -104,14 +108,16 @@ public class LegitAura extends Module {
     }
 
     private boolean canAttack(EntityLivingBase player) {
-
+    	if(player instanceof EntityVillager || player instanceof EntityArmorStand || player instanceof EntityAnimal || player instanceof EntityMob 
+    			|| player.getDisplayName().getFormattedText().contains("[NPC]") || player.getName().contains("#") || !player.getName().toLowerCase().contains("shop"))
+    		return false;
         if(Nightmare.instance.settingsManager.getSettingByName(this, "Teams").getValBoolean() && player.getDisplayName().getFormattedText().startsWith("\u00a7" + mc.thePlayer.getDisplayName().getFormattedText().charAt(1)))
             return false;
         if(player.isInvisible() && !Nightmare.instance.settingsManager.getSettingByName(this, "Invisibles").getValBoolean())
             return false;
         if(!isInFOV(player, Nightmare.instance.settingsManager.getSettingByName(this, "FOV").getValDouble()))
             return false;
-        return player != mc.thePlayer && player.isEntityAlive() && mc.thePlayer.getDistanceToEntity(player) <= mc.playerController.getBlockReachDistance();
+        return player != mc.thePlayer && player.isEntityAlive() && mc.thePlayer.getDistanceToEntity(player) <= Nightmare.instance.settingsManager.getSettingByName(this, "Range").getValDouble();
     }
 
     private boolean isInFOV(EntityLivingBase entity, double angle) {
