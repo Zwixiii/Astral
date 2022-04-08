@@ -12,6 +12,8 @@ import nightmare.Nightmare;
 import nightmare.event.EventTarget;
 import nightmare.event.impl.EventSendPacket;
 import nightmare.event.impl.EventTick;
+import nightmare.gui.notification.NotificationManager;
+import nightmare.gui.notification.NotificationType;
 import nightmare.module.Category;
 import nightmare.module.Module;
 import nightmare.settings.Setting;
@@ -62,6 +64,7 @@ public class Blink extends Module{
 		super.onEnable();
 		
 		if(mc.thePlayer == null || mc.theWorld == null || mc.isSingleplayer() || Nightmare.instance.moduleManager.getModuleByName("Freecam").isToggled()) {
+			NotificationManager.show(NotificationType.WARNING, "Module", "This module can use only Multiplayer", 5000);
 			this.setToggled(false);
 			return;
 		}

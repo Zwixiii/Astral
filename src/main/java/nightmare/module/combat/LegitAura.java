@@ -18,6 +18,7 @@ import nightmare.event.EventTarget;
 import nightmare.event.impl.EventLoadWorld;
 import nightmare.event.impl.EventPreMotionUpdate;
 import nightmare.gui.notification.NotificationManager;
+import nightmare.gui.notification.NotificationType;
 import nightmare.module.Category;
 import nightmare.module.Module;
 import nightmare.settings.Setting;
@@ -76,7 +77,7 @@ public class LegitAura extends Module {
     public void onLoadWold(EventLoadWorld event) {
     	if(Nightmare.instance.settingsManager.getSettingByName(this, "AutoDisable").getValBoolean()) {
     		this.setToggled(false);
-    		NotificationManager.show("Module", EnumChatFormatting.RED + "Disable " + EnumChatFormatting.WHITE + "(AutoDisable)" + " " + this.getName(), 2500);
+    		NotificationManager.show(NotificationType.ERROR, "Module", EnumChatFormatting.RED + "Disable " + EnumChatFormatting.WHITE + "(AutoDisable)" + " " + this.getName(), 2500);
     	}
     }
     

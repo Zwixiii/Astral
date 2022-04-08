@@ -10,6 +10,8 @@ import nightmare.event.impl.EventLoadWorld;
 import nightmare.event.impl.EventReceivePacket;
 import nightmare.event.impl.EventSendPacket;
 import nightmare.event.impl.EventUpdate;
+import nightmare.gui.notification.NotificationManager;
+import nightmare.gui.notification.NotificationType;
 import nightmare.module.Category;
 import nightmare.module.Module;
 import nightmare.settings.Setting;
@@ -48,6 +50,7 @@ public class AutoHypixel extends Module{
 		if(Nightmare.instance.settingsManager.getSettingByName(this, "AutoPlay").getValBoolean()) {
 			if(this.autoplay == true) {
 				if(notification == true) {
+					NotificationManager.show(NotificationType.INFO, "AutoHypixel", "Sending you to next game", delay * 1000);
 					notification = false;
 				}
 				if(timer.delay(1000 * delay)) {

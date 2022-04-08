@@ -17,7 +17,7 @@ public class NotificationManager {
         notifications.removeIf(Notification::shouldDelete);
     }
 
-    public static void show(String title, String message, int delay) {
-        notifications.add(new Notification(title, message, delay));
+    public static void show(NotificationType notificationType, String title, String message, int delay) {
+        notifications.add(new Notification(notificationType, title, message, delay));
     }
 }
