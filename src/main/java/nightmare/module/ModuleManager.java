@@ -36,6 +36,7 @@ import nightmare.module.world.AntiInvisible;
 import nightmare.module.world.AutoHypixel;
 import nightmare.module.world.ChestStealer;
 import nightmare.module.world.LightningTracker;
+import nightmare.module.world.StaffAnalyser;
 import nightmare.module.world.TimeChanger;
 
 public class ModuleManager {
@@ -83,6 +84,7 @@ public class ModuleManager {
     	modules.add(new AutoHypixel());
     	modules.add(new ChestStealer());
     	modules.add(new LightningTracker());
+    	modules.add(new StaffAnalyser());
     	modules.add(new TimeChanger());
     	
     	//Misc

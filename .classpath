@@ -24,11 +24,6 @@
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry sourcepath="C:/Users/EldoD/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/22.0.0/2ff08ea87697c3932851b121ac84d0db43620d34/annotations-22.0.0-sources.jar" kind="lib" path="C:/Users/EldoD/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/22.0.0/fb9bebc90794c7602e73d6ed0cb165a0c650be62/annotations-22.0.0.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value="main,test"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry sourcepath="C:/Users/EldoD/.gradle/caches/minecraft/net/minecraftforge/forge/1.8.9-11.15.1.1722/stable/22/forgeSrc-1.8.9-11.15.1.1722-sources.jar" kind="lib" path="C:/Users/EldoD/.gradle/caches/minecraft/net/minecraftforge/forge/1.8.9-11.15.1.1722/stable/22/forgeSrc-1.8.9-11.15.1.1722.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
