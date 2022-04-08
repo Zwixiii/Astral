@@ -13,6 +13,7 @@ import nightmare.module.combat.Velocity;
 import nightmare.module.misc.FPSBoost;
 import nightmare.module.misc.NameProtect;
 import nightmare.module.misc.NoPotionShift;
+import nightmare.module.misc.Particle;
 import nightmare.module.misc.Spin;
 import nightmare.module.movement.Blink;
 import nightmare.module.movement.FastBridge;
@@ -93,6 +94,7 @@ public class ModuleManager {
     	modules.add(new FPSBoost());
     	modules.add(new NameProtect());
     	modules.add(new NoPotionShift());
+    	modules.add(new Particle());
     	modules.add(new Spin());
     }
 

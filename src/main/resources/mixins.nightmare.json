@@ -10,6 +10,7 @@
      "block.MixinBlock",
 	 "client.MixinMinecraft",
 	 "entity.MixinEntity",
+	 "entity.MixinEntityPlayer",
 	 "entity.MixinEntityPlayerSP",
 	 "gui.MixinGuiDownloadTerrain",
 	 "gui.MixinGuiIngame",
