@@ -5,9 +5,11 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.item.ItemStack;
+import nightmare.Nightmare;
 import nightmare.fonts.impl.Fonts;
 import nightmare.gui.window.Window;
 import nightmare.utils.ColorUtils;
+import nightmare.utils.render.BlurUtils;
 
 public class Inventory extends Window{
 
@@ -22,6 +24,11 @@ public class Inventory extends Window{
         int startX = this.getX() + 2;
         int startY = this.getY() + 2;
         int curIndex = 0;
+        
+        if(Nightmare.instance.moduleManager.getModuleByName("Blur").isToggled() && Nightmare.instance.settingsManager.getSettingByName(Nightmare.instance.moduleManager.getModuleByName("Blur"), "Inventory").getValBoolean()) {
+        	BlurUtils.drawBlurRect(this.getX(), this.getY(), this.getWidth(), this.getHeight());
+        }
+        
         Gui.drawRect(this.getX(), this.getY(), this.getWidth(), this.getHeight(), ColorUtils.getBackgroundColor());
         Gui.drawRect(this.getX(), this.getY() - 14, this.getWidth(), this.getY(), ColorUtils.getClientColor());
         

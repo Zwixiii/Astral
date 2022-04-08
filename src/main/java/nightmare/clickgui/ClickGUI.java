@@ -10,6 +10,8 @@ import nightmare.clickgui.component.Frame;
 import nightmare.gui.window.Window;
 import nightmare.module.Category;
 import nightmare.utils.MouseUtils;
+import nightmare.utils.ScreenUtils;
+import nightmare.utils.render.BlurUtils;
 
 public class ClickGUI extends GuiScreen {
 
@@ -40,6 +42,11 @@ public class ClickGUI extends GuiScreen {
 	
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+		
+		if(Nightmare.instance.moduleManager.getModuleByName("Blur").isToggled() && Nightmare.instance.settingsManager.getSettingByName(Nightmare.instance.moduleManager.getModuleByName("Blur"), "ClickGUI").getValBoolean()) {
+			BlurUtils.drawBlurRect(0, 0, ScreenUtils.getWidth(), ScreenUtils.getHeight());
+		}
+		
 		for(Frame frame : frames) {
 			frame.renderFrame(this.fontRendererObj);
 			frame.updatePosition(mouseX, mouseY);
