@@ -18,7 +18,8 @@ public class Module {
     
     private Category category;
     
-    protected boolean toggled;
+    protected boolean toggled, blatantModule;
+    
 	public boolean visible = true;
 	
     public Module(String name, int key, Category category) {
@@ -26,6 +27,7 @@ public class Module {
         this.key = key;
         this.category = category;
         toggled = false;
+        blatantModule = false;
     }
 
     public void onEnable() {
@@ -40,8 +42,13 @@ public class Module {
         toggled = !toggled;
         onToggle();
         if(toggled) {
-            onEnable();
-            NotificationManager.show(NotificationType.SUCCESS,"Module", EnumChatFormatting.GREEN + "Enable " + EnumChatFormatting.WHITE + name, 2500);
+        	if(isBlatantModule() && Nightmare.instance.moduleManager.getModuleByName("BlatantMode").isDisabled()) {
+        		setToggled(false);
+        		NotificationManager.show(NotificationType.ERROR, "Module", "This is BlatantModule!, Please toggle BlatantMode", 3000);
+        	}else {
+                onEnable();
+                NotificationManager.show(NotificationType.SUCCESS,"Module", EnumChatFormatting.GREEN + "Enable " + EnumChatFormatting.WHITE + name, 2500);
+        	}
         }
         else {
             onDisable();
@@ -99,5 +106,13 @@ public class Module {
 	
 	public String setName(String name) {
 		return this.name = name;
+	}
+	
+	public boolean setBlatantModule(boolean blatant) {
+		return this.blatantModule = blatant;
+	}
+	
+	public boolean isBlatantModule() {
+		return this.blatantModule;
 	}
 }

@@ -10,6 +10,7 @@ import nightmare.module.combat.HitBox;
 import nightmare.module.combat.LegitAura;
 import nightmare.module.combat.Reach;
 import nightmare.module.combat.Velocity;
+import nightmare.module.misc.BlatantMode;
 import nightmare.module.misc.FPSBoost;
 import nightmare.module.misc.NameProtect;
 import nightmare.module.misc.NoPotionShift;
@@ -17,6 +18,7 @@ import nightmare.module.misc.Particle;
 import nightmare.module.misc.Spin;
 import nightmare.module.movement.Blink;
 import nightmare.module.movement.FastBridge;
+import nightmare.module.movement.Fly;
 import nightmare.module.movement.GuiMove;
 import nightmare.module.movement.Sprint;
 import nightmare.module.movement.VClip;
@@ -60,6 +62,7 @@ public class ModuleManager {
     	//Movement
     	modules.add(new Blink());
     	modules.add(new FastBridge());
+    	modules.add(new Fly());
     	modules.add(new GuiMove());
     	modules.add(new Sprint());
     	modules.add(new VClip());
@@ -91,6 +94,7 @@ public class ModuleManager {
     	modules.add(new TimeChanger());
     	
     	//Misc
+    	modules.add(new BlatantMode());
     	modules.add(new FPSBoost());
     	modules.add(new NameProtect());
     	modules.add(new NoPotionShift());
