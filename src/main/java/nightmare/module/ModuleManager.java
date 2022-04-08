@@ -18,7 +18,7 @@ import nightmare.module.misc.Particle;
 import nightmare.module.misc.Spin;
 import nightmare.module.movement.Blink;
 import nightmare.module.movement.FastBridge;
-import nightmare.module.movement.Fly;
+import nightmare.module.movement.Flight;
 import nightmare.module.movement.GuiMove;
 import nightmare.module.movement.Sprint;
 import nightmare.module.movement.VClip;
@@ -62,7 +62,7 @@ public class ModuleManager {
     	//Movement
     	modules.add(new Blink());
     	modules.add(new FastBridge());
-    	modules.add(new Fly());
+    	modules.add(new Flight());
     	modules.add(new GuiMove());
     	modules.add(new Sprint());
     	modules.add(new VClip());

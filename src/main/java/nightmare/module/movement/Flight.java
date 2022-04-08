@@ -5,10 +5,10 @@ import nightmare.event.impl.EventUpdate;
 import nightmare.module.Category;
 import nightmare.module.Module;
 
-public class Fly extends Module{
+public class Flight extends Module{
 
-	public Fly() {
-		super("Fly", 0, Category.MOVEMENT);
+	public Flight() {
+		super("Flight", 0, Category.MOVEMENT);
 		
 		this.setBlatantModule(true);
 	}
