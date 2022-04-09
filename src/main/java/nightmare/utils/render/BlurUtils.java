@@ -6,8 +6,8 @@ import net.minecraft.client.shader.ShaderGroup;
 import net.minecraft.util.ResourceLocation;
 import nightmare.Nightmare;
 import nightmare.mixin.mixins.accessor.MinecraftAccessor;
+import nightmare.utils.AccessorUtils;
 import nightmare.utils.ScreenUtils;
-import nightmare.utils.motionblur.AccessorUtils;
 
 public class BlurUtils {
 	

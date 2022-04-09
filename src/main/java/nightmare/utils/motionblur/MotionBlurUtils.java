@@ -12,6 +12,7 @@ import net.minecraft.client.shader.ShaderGroup;
 import net.minecraft.client.shader.ShaderUniform;
 import net.minecraft.util.ResourceLocation;
 import nightmare.Nightmare;
+import nightmare.utils.AccessorUtils;
 
 public class MotionBlurUtils {
 

@@ -7,7 +7,7 @@ import nightmare.module.Category;
 import nightmare.module.Module;
 
 public class NoFall extends Module{
-
+	
 	public NoFall() {
 		super("NoFall", 0, Category.PLAYER);
 		

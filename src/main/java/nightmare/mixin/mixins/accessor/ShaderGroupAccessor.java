@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 import net.minecraft.client.shader.Shader;
 import net.minecraft.client.shader.ShaderGroup;
-import nightmare.utils.motionblur.AccessorUtils;
+import nightmare.utils.AccessorUtils;
 
 @Mixin(ShaderGroup.class)
 public abstract class ShaderGroupAccessor implements AccessorUtils {
