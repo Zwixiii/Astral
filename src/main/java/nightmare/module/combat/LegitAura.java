@@ -110,7 +110,7 @@ public class LegitAura extends Module {
 
     private boolean canAttack(EntityLivingBase player) {
     	if(player instanceof EntityVillager || player instanceof EntityArmorStand || player instanceof EntityAnimal || player instanceof EntityMob 
-    			|| player.getDisplayName().getFormattedText().contains("[NPC]") || player.getName().contains("#") || !player.getName().toLowerCase().contains("shop"))
+    			|| player.getDisplayName().getFormattedText().contains("[NPC]") || player.getName().contains("#") || player.getName().toLowerCase().contains("shop"))
     		return false;
         if(Nightmare.instance.settingsManager.getSettingByName(this, "Teams").getValBoolean() && player.getDisplayName().getFormattedText().startsWith("\u00a7" + mc.thePlayer.getDisplayName().getFormattedText().charAt(1)))
             return false;
