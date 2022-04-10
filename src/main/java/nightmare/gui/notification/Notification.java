@@ -5,6 +5,7 @@ import java.awt.Color;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.MathHelper;
 import nightmare.fonts.impl.Fonts;
+import nightmare.utils.AnimationUtils;
 import nightmare.utils.ColorUtils;
 import nightmare.utils.TimerUtils;
 import nightmare.utils.render.RenderUtils;
@@ -27,8 +28,6 @@ public class Notification {
     
 	public static float rotateDirection = 0;
 	public static boolean animationDone = false;
-
-	public static double delta;
 	
 	private int notificationColor;
 	
@@ -68,8 +67,8 @@ public class Notification {
         	notificationColor = new Color(250, 55, 55).getRGB();
         }
         
-        animationX = Notification.animation(this.animationX, target, (Math.max(10, (Math.abs(this.animationX - (target))) * 40) * 0.4f));
-        animationY = Notification.animation(animationY, offsetY, (Math.max(10, (Math.abs(animationY - (offsetY))) * 40) * 0.3f));
+        animationX = AnimationUtils.setAnimation(this.animationX, target, (Math.max(10, (Math.abs(this.animationX - (target))) * 40) * 0.4f));
+        animationY = AnimationUtils.setAnimation(animationY, offsetY, (Math.max(10, (Math.abs(animationY - (offsetY))) * 40) * 0.3f));
 
         x1 = x - width + this.animationX;
         x2 = x + animationX + 0;
@@ -97,20 +96,4 @@ public class Notification {
     private boolean isFinished() {
         return timer.delay(delay);
     }
-
-	public static float animation(float animation, float finalState, float speed) {
-		final float add = (float) (delta * (speed / 1000f));
-		if (animation < finalState) {
-			if (animation + add < finalState) {
-				animation += add;
-			} else {
-				animation = finalState;
-			}
-		} else if (animation - add > finalState) {
-			animation -= add;
-		} else {
-			animation = finalState;
-		}
-		return animation;
-	}
 }

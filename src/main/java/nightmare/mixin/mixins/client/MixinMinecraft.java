@@ -1,7 +1,5 @@
 package nightmare.mixin.mixins.client;
 
-import java.io.IOException;
-
 import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
 import org.spongepowered.asm.mixin.Mixin;
@@ -12,12 +10,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.Session;
-import net.minecraftforge.fml.repackage.com.nothome.delta.Delta;
 import nightmare.Nightmare;
 import nightmare.event.impl.EventKey;
 import nightmare.event.impl.EventTick;
-import nightmare.gui.notification.Notification;
 import nightmare.hooks.MinecraftHook;
+import nightmare.utils.AnimationUtils;
 
 @Mixin(Minecraft.class)
 public class MixinMinecraft{
@@ -80,6 +77,6 @@ public class MixinMinecraft{
         long currentTime = getTime();
         int deltaTime = (int) (currentTime - lastFrame);
         lastFrame = currentTime;
-        Notification.delta = deltaTime;
+        AnimationUtils.delta = deltaTime;
     }
 }
