@@ -8,6 +8,7 @@ import net.minecraft.item.ItemTool;
 import nightmare.Nightmare;
 import nightmare.event.EventTarget;
 import nightmare.event.impl.EventTick;
+import nightmare.event.impl.EventUpdate;
 import nightmare.module.Category;
 import nightmare.module.Module;
 import nightmare.settings.Setting;
@@ -23,6 +24,7 @@ public class AutoClicker extends Module{
 		Nightmare.instance.settingsManager.rSetting(new Setting("MinCPS", this, 12, 1, 20, false));
 		Nightmare.instance.settingsManager.rSetting(new Setting("MaxCPS", this, 15, 1, 20, false));
 		Nightmare.instance.settingsManager.rSetting(new Setting("Weapons Only", this, false));
+		Nightmare.instance.settingsManager.rSetting(new Setting("JitterAim", this, false));
 	}
 	
 	@EventTarget
@@ -35,4 +37,17 @@ public class AutoClicker extends Module{
         }
 	}
 
+	@EventTarget
+	public void onUpdate(EventUpdate event) {
+		
+		if(mc.thePlayer == null) {
+			return;
+		}
+		
+		if(Nightmare.instance.settingsManager.getSettingByName(this, "JitterAim").getValBoolean()) {
+			if (mc.gameSettings.keyBindAttack.isKeyDown() && (!Nightmare.instance.settingsManager.getSettingByName(this, "Weapons Only").getValBoolean() || mc.thePlayer.getHeldItem() != null && (mc.thePlayer.getHeldItem().getItem() instanceof ItemTool || mc.thePlayer.getHeldItem().getItem() instanceof ItemSword))) {
+				mc.thePlayer.rotationPitch =  mc.thePlayer.rotationPitch + ThreadLocalRandom.current().nextInt(-1, 2);
+			}
+		}
+	}
 }

@@ -7,7 +7,6 @@ import nightmare.module.combat.AntiBot;
 import nightmare.module.combat.AutoClicker;
 import nightmare.module.combat.BowAimAssist;
 import nightmare.module.combat.HitBox;
-import nightmare.module.combat.JitterAim;
 import nightmare.module.combat.LegitAura;
 import nightmare.module.combat.Reach;
 import nightmare.module.combat.Velocity;
@@ -58,7 +57,6 @@ public class ModuleManager {
     	modules.add(new BowAimAssist());
     	modules.add(new Reach());
     	modules.add(new HitBox());
-    	modules.add(new JitterAim());
     	modules.add(new LegitAura());
     	modules.add(new Velocity());
     	

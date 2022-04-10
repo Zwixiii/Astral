@@ -9,7 +9,6 @@ import net.minecraft.util.MathHelper;
 public class RotationUtils {
 	
 	private static Minecraft mc = Minecraft.getMinecraft();
-	
 
     public static boolean isVisibleFOV(final Entity e, final float fov) {
         return ((Math.abs(RotationUtils.getRotations(e)[0] - mc.thePlayer.rotationYaw) % 360.0f > 180.0f) ? (360.0f - Math.abs(RotationUtils.getRotations(e)[0] - mc.thePlayer.rotationYaw) % 360.0f) : (Math.abs(RotationUtils.getRotations(e)[0] - mc.thePlayer.rotationYaw) % 360.0f)) <= fov;
