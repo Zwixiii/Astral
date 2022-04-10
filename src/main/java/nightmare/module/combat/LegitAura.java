@@ -35,8 +35,8 @@ public class LegitAura extends Module {
 
         Nightmare.instance.settingsManager.rSetting(new Setting("AutoDisable", this, false));
         Nightmare.instance.settingsManager.rSetting(new Setting("HeldItem", this, false));
-		Nightmare.instance.settingsManager.rSetting(new Setting("Horizontal", this, 12, 0, 20, false));
-		Nightmare.instance.settingsManager.rSetting(new Setting("Vertical", this, 8, 0, 20, false));
+		Nightmare.instance.settingsManager.rSetting(new Setting("Horizontal", this, 12, 0, 30, false));
+		Nightmare.instance.settingsManager.rSetting(new Setting("Vertical", this, 8, 0, 30, false));
 		Nightmare.instance.settingsManager.rSetting(new Setting("MinCPS", this, 12, 1, 20, false));
 		Nightmare.instance.settingsManager.rSetting(new Setting("MaxCPS", this, 15, 1, 20, false));
 		Nightmare.instance.settingsManager.rSetting(new Setting("Range", this, 4.2, 1.0, 8.0, false));
