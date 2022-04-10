@@ -27,6 +27,8 @@ public class HUD extends Module{
 		Nightmare.instance.settingsManager.rSetting(new Setting("ClientName", this, false));
 		Nightmare.instance.settingsManager.rSetting(new Setting("Inventory", this, true));
 		Nightmare.instance.settingsManager.rSetting(new Setting("Notification", this, true));
+		Nightmare.instance.settingsManager.rSetting(new Setting("TargetHUD", this, true));
+		Nightmare.instance.settingsManager.rSetting(new Setting("Distance", this, 6.5F, 3, 15, false));
 		Nightmare.instance.settingsManager.rSetting(new Setting("Red", this, 0, 0, 255, true));
 		Nightmare.instance.settingsManager.rSetting(new Setting("Green", this, 210, 0, 255, true));
 		Nightmare.instance.settingsManager.rSetting(new Setting("Blue", this, 255, 0, 255, true));

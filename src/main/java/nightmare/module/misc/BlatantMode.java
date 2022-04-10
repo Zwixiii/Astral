@@ -1,5 +1,6 @@
 package nightmare.module.misc;
 
+import nightmare.Nightmare;
 import nightmare.gui.notification.NotificationManager;
 import nightmare.gui.notification.NotificationType;
 import nightmare.module.Category;
@@ -15,5 +16,14 @@ public class BlatantMode extends Module{
 	public void onEnable() {
 		NotificationManager.show(NotificationType.WARNING, "Module", "Not recommended to use as it is likely to be banned", 5000);
 		super.onEnable();
+	}
+	
+	@Override
+	public void onDisable() {
+		for(Module m : Nightmare.instance.moduleManager.getModules()) {
+			if(m.isBlatantModule()) {
+				m.setToggled(false);
+			}
+		}
 	}
 }

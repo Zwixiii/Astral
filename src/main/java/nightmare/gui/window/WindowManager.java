@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import nightmare.gui.window.impl.ActiveMods;
 import nightmare.gui.window.impl.Inventory;
+import nightmare.gui.window.impl.TargetHUD;
 
 public class WindowManager {
 	
@@ -12,6 +13,7 @@ public class WindowManager {
     public WindowManager() {
     	windows.add(new ActiveMods());
     	windows.add(new Inventory());
+    	windows.add(new TargetHUD());
     }
     
     public ArrayList<Window> getWindows() {

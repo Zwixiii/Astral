@@ -3,12 +3,15 @@ package nightmare.clickgui;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiScreen;
 import nightmare.Nightmare;
 import nightmare.clickgui.component.Component;
 import nightmare.clickgui.component.Frame;
+import nightmare.fonts.impl.Fonts;
 import nightmare.gui.window.Window;
 import nightmare.module.Category;
+import nightmare.utils.ColorUtils;
 import nightmare.utils.MouseUtils;
 import nightmare.utils.ScreenUtils;
 import nightmare.utils.render.BlurUtils;
@@ -57,6 +60,12 @@ public class ClickGUI extends GuiScreen {
 		
     	for(Window window : Nightmare.instance.windowManager.getWindows()) {
     		
+    		if(!window.isShowWindow()) {
+    	        Gui.drawRect(window.getX(), window.getY() - 14, window.getWidth(), window.getY(), ColorUtils.getClientColor());
+    	        
+    			Fonts.REGULAR.REGULAR_20.REGULAR_20.drawString(window.getName(), window.getX() + 4, window.getY() - 10, -1, false);
+    		}
+    		
     		if(window.isDrag() && window.isDragging() && (Nightmare.instance.moduleManager.getModuleByName("HUD").isToggled() && Nightmare.instance.settingsManager.getSettingByName(Nightmare.instance.moduleManager.getModuleByName("HUD"), window.getName()).getValBoolean())) {
     			window.setX(mouseX + window.getDraggingX());
     			window.setY(mouseY + window.getDraggingY());
@@ -101,7 +110,7 @@ public class ClickGUI extends GuiScreen {
 		}
 		
         for(Window window : Nightmare.instance.windowManager.getWindows()) {
-        	if(MouseUtils.isInside(mouseX, mouseY, window.getX(), window.isShowWindow() ? window.getY() - 14 : window.getY(), window.getWidth(), window.isShowWindow() ? window.getY() : window.getHeight()) && (Nightmare.instance.moduleManager.getModuleByName("HUD").isToggled() && Nightmare.instance.settingsManager.getSettingByName(Nightmare.instance.moduleManager.getModuleByName("HUD"), window.getName()).getValBoolean()) && mouseButton == 0) {
+        	if(MouseUtils.isInside(mouseX, mouseY, window.getX(), window.getY() - 14, window.getWidth(), window.getY()) && (Nightmare.instance.moduleManager.getModuleByName("HUD").isToggled() && Nightmare.instance.settingsManager.getSettingByName(Nightmare.instance.moduleManager.getModuleByName("HUD"), window.getName()).getValBoolean()) && mouseButton == 0) {
         		window.setDragging(true);
         		window.setDraggingX(window.getX() - mouseX);
         		window.setDraggingY(window.getY() - mouseY);

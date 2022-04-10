@@ -1,5 +1,9 @@
 package nightmare.utils.render;
 
+import java.awt.Color;
+
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
@@ -7,6 +11,17 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 
 public class RenderUtils {
 
+    public static void setColor(Color color) {
+        if (color == null) {
+        	color = Color.white;
+        }
+        color(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, color.getAlpha() / 255F);
+    }
+    
+    private static void color(final double red, final double green, final double blue, final double alpha) {
+        GL11.glColor4d(red, green, blue, alpha);
+    }
+    
     public static void drawRect(double left, double top, double right, double bottom, int color)
     {
         if (left < right)
@@ -77,5 +92,42 @@ public class RenderUtils {
         tessellator.draw();
         GlStateManager.enableTexture2D();
         GlStateManager.disableBlend();
+    }
+    
+    public static void drawBorderedRect(float left, float top, float right, float bottom, float lineWidth, int color, int outlineColor) {
+        drawRect(left, top, right, bottom, color);
+
+        float f = (outlineColor >> 24 & 0xFF) / 255.0F;
+        float f1 = (outlineColor >> 16 & 0xFF) / 255.0F;
+        float f2 = (outlineColor >> 8 & 0xFF) / 255.0F;
+        float f3 = (outlineColor & 0xFF) / 255.0F;
+
+        GL11.glEnable(3042);
+        GL11.glDisable(3553);
+        GL11.glBlendFunc(770, 771);
+        GL11.glEnable(2848);
+
+        GL11.glPushMatrix();
+        GL11.glColor4f(f1, f2, f3, f);
+        GL11.glLineWidth(lineWidth);
+        GL11.glBegin(1);
+        GL11.glVertex2d(left, top);
+        GL11.glVertex2d(left, bottom);
+        GL11.glVertex2d(right, bottom);
+        GL11.glVertex2d(right, top);
+        GL11.glVertex2d(left, top);
+        GL11.glVertex2d(right, top);
+        GL11.glVertex2d(left, bottom);
+        GL11.glVertex2d(right, bottom);
+        GL11.glEnd();
+        GL11.glColor4f(1, 1, 1, 1);
+        GL11.glPopMatrix();
+
+        GlStateManager.enableTexture2D();
+        GlStateManager.disableBlend();
+        GL11.glColor4f(1, 1, 1, 255);
+        GL11.glEnable(3553);
+        GL11.glDisable(3042);
+        GL11.glDisable(2848);
     }
 }
