@@ -3,8 +3,6 @@ package nightmare.clickgui.component.components.sub;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import nightmare.clickgui.component.Component;
 import nightmare.clickgui.component.components.Button;
@@ -14,8 +12,6 @@ import nightmare.utils.ColorUtils;
 
 public class Slider extends Component {
 
-	private boolean hovered;
-
 	private Setting set;
 	private Button parent;
 	private int offset;
@@ -24,8 +20,6 @@ public class Slider extends Component {
 	private boolean dragging = false;
 
 	private double renderWidth;
-	
-	private FontRenderer fr = Minecraft.getMinecraft().fontRendererObj;
 	
 	public Slider(Setting value, Button button, int offset) {
 		this.set = value;
@@ -37,8 +31,8 @@ public class Slider extends Component {
 	
 	@Override
 	public void renderComponent() {
+		
 		Gui.drawRect(parent.frame.getX(), parent.frame.getY() + offset, parent.frame.getX() + parent.frame.getWidth(), parent.frame.getY() + offset + 18, ColorUtils.getBackgroundColor());
-		final int drag = (int)(this.set.getValDouble() / this.set.getMax() * this.parent.frame.getWidth());
 		Gui.drawRect(parent.frame.getX(), parent.frame.getY() + offset + 2, parent.frame.getX() + (int) renderWidth, parent.frame.getY() + offset + 18, ColorUtils.getClientColor());
 		Fonts.REGULAR.REGULAR_20.REGULAR_20.drawString(this.set.getName() + ": " + this.set.getValDouble() , (parent.frame.getX() + 5), (parent.frame.getY() + offset + 2)  + 5, -1);
 	}
@@ -50,7 +44,6 @@ public class Slider extends Component {
 	
 	@Override
 	public void updateComponent(int mouseX, int mouseY) {
-		this.hovered = isMouseOnButtonD(mouseX, mouseY) || isMouseOnButtonI(mouseX, mouseY);
 		this.y = parent.frame.getY() + offset;
 		this.x = parent.frame.getX();
 		

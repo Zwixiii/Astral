@@ -21,7 +21,7 @@ public class ClickGUI extends GuiScreen {
 	public static ArrayList<Frame> frames;
 	
 	public ClickGUI() {
-		this.frames = new ArrayList<Frame>();
+		ClickGUI.frames = new ArrayList<Frame>();
 		int frameX = 20;
 		for(Category category : Category.values()) {
 			Frame frame = new Frame(category);

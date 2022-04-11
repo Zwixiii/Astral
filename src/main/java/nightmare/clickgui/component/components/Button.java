@@ -2,8 +2,6 @@ package nightmare.clickgui.component.components;
 
 import java.util.ArrayList;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import nightmare.Nightmare;
 import nightmare.clickgui.component.Component;
@@ -23,12 +21,8 @@ public class Button extends Component {
 	public Module module;
 	public Frame frame;
 	public int offset;
-	private boolean isHovered;
 	private ArrayList<Component> components;
 	public boolean open;
-	private int height;
-	
-	private FontRenderer fr = Minecraft.getMinecraft().fontRendererObj;
 	
 	public Button(Module mod, Frame parent, int offset) {
 		this.module = mod;
@@ -36,7 +30,6 @@ public class Button extends Component {
 		this.offset = offset;
 		this.components = new ArrayList<Component>();
 		this.open = false;
-		height = 18;
 		int opY = offset + 18;
 		if(Nightmare.instance.settingsManager.getSettingsByMod(mod) != null) {
 			for(Setting s : Nightmare.instance.settingsManager.getSettingsByMod(mod)){
@@ -70,6 +63,7 @@ public class Button extends Component {
 	
 	@Override
 	public void renderComponent() {
+		
 		Gui.drawRect(frame.getX(), this.frame.getY() + this.offset, frame.getX() + frame.getWidth(), this.frame.getY() + 18 + this.offset, ColorUtils.getBackgroundColor());
 		
 		Fonts.REGULAR.REGULAR_20.REGULAR_20.drawString(this.module.getName(), (frame.getX() + 2), (frame.getY() + offset + 2) + 4, module.isToggled() ? ColorUtils.getClientColor() : -1);
@@ -97,7 +91,6 @@ public class Button extends Component {
 	
 	@Override
 	public void updateComponent(int mouseX, int mouseY) {
-		this.isHovered = isMouseOnButton(mouseX, mouseY);
 		if(!this.components.isEmpty()) {
 			for(Component comp : this.components) {
 				comp.updateComponent(mouseX, mouseY);

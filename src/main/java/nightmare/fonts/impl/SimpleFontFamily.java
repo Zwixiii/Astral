@@ -7,6 +7,7 @@ import nightmare.fonts.api.FontType;
 
 final class SimpleFontFamily extends Int2ObjectAVLTreeMap<FontRenderer> implements FontFamily {
 
+	private static final long serialVersionUID = 1L;
 	private final FontType fontType;
 	private final java.awt.Font awtFont;
 

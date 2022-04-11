@@ -92,18 +92,13 @@ public class AutoHypixel extends Module{
         if (playCommand.startsWith("/play ")) {
             String display = playCommand.replace("/play ", "").replace("_", " ");
             boolean nextUp = true;
-            String result = "";
             for (char c : display.toCharArray()) {
                 if (c == ' ') {
                     nextUp = true;
-                    result += " ";
                     continue;
                 }
                 if (nextUp) {
                     nextUp = false;
-                    result += Character.toUpperCase(c);
-                } else {
-                    result += c;
                 }
             }
         }

@@ -25,9 +25,10 @@ import nightmare.utils.TimerUtils;
 public class InvManager extends Module{
 
 	private TimerUtils timer = new TimerUtils();
-    private List allSwords = new ArrayList();
-    private List[] allArmors = new List[4];
-	private List trash = new ArrayList();
+    private List<Integer> allSwords = new ArrayList<Integer>();
+    @SuppressWarnings("rawtypes")
+	private List[] allArmors = new List[4];
+	private List<Integer> trash = new ArrayList<Integer>();
 	private boolean cleaning;
 	private int[] bestArmorSlot;
 	private int bestSwordSlot;
@@ -117,7 +118,7 @@ public class InvManager extends Module{
       int armorType;
       for(i = 0; i < this.bestArmorSlot.length; ++i) {
          itemStack = mc.thePlayer.inventory.armorItemInSlot(i);
-         this.allArmors[i] = new ArrayList();
+         this.allArmors[i] = new ArrayList<Object>();
          if (itemStack != null && itemStack.getItem() != null && itemStack.getItem() instanceof ItemArmor) {
             armor = (ItemArmor)itemStack.getItem();
             armorType = armor.damageReduceAmount + EnchantmentHelper.getEnchantmentModifierDamage(new ItemStack[]{itemStack}, DamageSource.generic);
@@ -153,9 +154,9 @@ public class InvManager extends Module{
       }
 
       for(i = 0; i < this.allArmors.length; ++i) {
-         List armorItem = this.allArmors[i];
+         List<?> armorItem = this.allArmors[i];
          if (armorItem != null) {
-            List integers = this.trash;
+            List<Integer> integers = this.trash;
             int i1 = 0;
 
             for(int armorItemSize = armorItem.size(); i1 < armorItemSize; ++i1) {
@@ -167,7 +168,7 @@ public class InvManager extends Module{
          }
       }
 
-      List integers = this.trash;
+      List<Integer> integers = this.trash;
       int i1 = 0;
 
       for(int allSwordsSize = this.allSwords.size(); i1 < allSwordsSize; ++i1) {

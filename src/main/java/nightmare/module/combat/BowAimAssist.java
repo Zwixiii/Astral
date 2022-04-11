@@ -78,7 +78,7 @@ public class BowAimAssist extends Module{
 	}
 
 	private void faceTarget(Entity target, float speed) {
-		EntityPlayerSP player = this.mc.thePlayer;
+		EntityPlayerSP player = mc.thePlayer;
         final float[] rotation = this.getPlayerRotations(target);
 		float yaw = rotation[0];
 		float pitch = rotation[1];

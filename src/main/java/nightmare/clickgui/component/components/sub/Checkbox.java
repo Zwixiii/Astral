@@ -1,7 +1,5 @@
 package nightmare.clickgui.component.components.sub;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import nightmare.clickgui.component.Component;
 import nightmare.clickgui.component.components.Button;
@@ -10,15 +8,12 @@ import nightmare.settings.Setting;
 import nightmare.utils.ColorUtils;
 
 public class Checkbox extends Component {
-
-	private boolean hovered;
+	
 	private Setting op;
 	private Button parent;
 	private int offset;
 	private int x;
 	private int y;
-	
-	private FontRenderer fr = Minecraft.getMinecraft().fontRendererObj;
 	
 	public Checkbox(Setting option, Button button, int offset) {
 		this.op = option;
@@ -47,7 +42,6 @@ public class Checkbox extends Component {
 	
 	@Override
 	public void updateComponent(int mouseX, int mouseY) {
-		this.hovered = isMouseOnButton(mouseX, mouseY);
 		this.y = parent.frame.getY() + offset;
 		this.x = parent.frame.getX();
 	}

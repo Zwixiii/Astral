@@ -6,6 +6,7 @@ public final class SneakyThrowing {
 		return sneakyThrow0(throwable);
 	}
 
+	@SuppressWarnings("unchecked")
 	private static <T extends Throwable> T sneakyThrow0(Throwable throwable) throws T {
 		throw (T) throwable;
 	}

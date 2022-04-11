@@ -15,9 +15,6 @@ public class AutoRod extends Module{
 
     private final TimerUtils timer = new TimerUtils();
     private final TimerUtils timer2 = new TimerUtils();
-
-    private Boolean switchBack = false;
-    private Boolean useRod = false;
     
     private int oldCurrentItem;
     
@@ -91,7 +88,6 @@ public class AutoRod extends Module{
     private void Rod() {
         int rod = findRod(36, 45);
         mc.playerController.sendUseItem(mc.thePlayer, mc.theWorld, mc.thePlayer.inventoryContainer.getSlot(rod).getStack());
-        switchBack = true;
         timer.reset();
     }
 }

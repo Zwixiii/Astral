@@ -1,7 +1,6 @@
 package nightmare.module.movement;
 
 import net.minecraft.client.settings.KeyBinding;
-import nightmare.Nightmare;
 import nightmare.event.EventTarget;
 import nightmare.event.impl.EventUpdate;
 import nightmare.module.Category;

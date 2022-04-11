@@ -22,7 +22,7 @@ import nightmare.utils.TimerUtils;
 public class Blink extends Module{
 
     private EntityOtherPlayerMP blinkEntity;
-    private final ArrayList<Packet> packetList = new ArrayList();
+    private final ArrayList<Packet<?>> packetList = new ArrayList<Packet<?>>();
     
     private TimerUtils timer = new TimerUtils();
     

@@ -26,7 +26,7 @@ public class CheckThread extends Thread
                         Thread.sleep((long)(Nightmare.instance.settingsManager.getSettingByName(Nightmare.instance.moduleManager.getModuleByName("StaffAnalyser"), "Delay").getValDouble() * 1000.0));
                         final String result = HttpUtils.performGetRequest(new URL("https://api.hypixel.net/watchdogStats?key=" + StaffAnalyser.key));
                         final Gson gson = new Gson();
-                        final BanQuantityListJSON banQuantityListJSON = (BanQuantityListJSON)gson.fromJson(result, (Class)BanQuantityListJSON.class);
+                        final BanQuantityListJSON banQuantityListJSON = (BanQuantityListJSON)gson.fromJson(result, (Class<?>)BanQuantityListJSON.class);
                         final int staffTotal = banQuantityListJSON.getStaffTotal();
                         if (this.lastBannedCount == 0) {
                             this.lastBannedCount = staffTotal;

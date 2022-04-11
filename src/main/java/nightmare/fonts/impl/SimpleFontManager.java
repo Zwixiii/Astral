@@ -32,6 +32,8 @@ public final class SimpleFontManager implements FontManager {
 
 	private static final class FontRegistry extends EnumMap<FontType, FontFamily> {
 
+		private static final long serialVersionUID = 1L;
+
 		private FontRegistry() { super(FontType.class); }
 
 		private FontFamily fontFamily(FontType fontType) {

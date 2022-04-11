@@ -12,7 +12,6 @@ import java.awt.image.BufferedImage;
 
 import org.lwjgl.opengl.GL11;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import nightmare.fonts.api.FontRenderer;
@@ -25,7 +24,6 @@ final class SimpleFontRenderer implements FontRenderer {
 
     private static final short CHARS = 256;
     private static final float IMG_SIZE = 512;
-    private static final float CHAR_OFFSET = 0f;
 
     private final CharData[] charData = new CharData[CHARS];
     private final CharData[] boldChars = new CharData[CHARS];
@@ -139,9 +137,7 @@ final class SimpleFontRenderer implements FontRenderer {
         x -= 1;
 
         if (text == null) return 0.0F;
-
-        Minecraft mc = Minecraft.getMinecraft();
-
+        
         if (color == 0x20FFFFFF) color = 0xFFFFFF;
         if ((color & 0xFC000000) == 0) color |= 0xFF000000;
 
@@ -151,7 +147,6 @@ final class SimpleFontRenderer implements FontRenderer {
 
         CharData[] charData = this.charData;
         float alpha = (color >> 24 & 0xFF) / 255.0F;
-        final boolean randomCase = false;
 
         x *= 2.0D;
         y = (y - 3.0D) * 2.0D;
@@ -312,9 +307,7 @@ final class SimpleFontRenderer implements FontRenderer {
     @Override
     public int getStringWidth(CharSequence text) {
         if (text == null) return 0;
-
-        Minecraft mc = Minecraft.getMinecraft();
-
+        
         int width = 0;
         CharData[] currentData = charData;
         boolean bold = false;

@@ -44,7 +44,7 @@ public class InventoryUtils {
 		if (stack != null && stack.getItem() instanceof ItemPotion) {
 			ItemPotion potion = (ItemPotion)stack.getItem();
 			if (ItemPotion.isSplash(stack.getItemDamage())) {
-	        	Iterator var2 = potion.getEffects(stack).iterator();
+	        	Iterator<?> var2 = potion.getEffects(stack).iterator();
 
 	            while(var2.hasNext()) {
 	               Object o = var2.next();

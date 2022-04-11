@@ -75,9 +75,8 @@ public class AimAssist extends Module{
 		if(mc.theWorld != null) {
 			for (Object e : mc.theWorld.getLoadedEntityList()) {
 				double yawdistance;
-				float yaw;
 				Entity en = (Entity) e;
-				if (en == mc.thePlayer || !this.isValid(en) || !(maxDistance > (yawdistance = getDistanceBetweenAngles(yaw = RotationUtils.getAngles(en)[1], mc.thePlayer.rotationYaw)))) {
+				if (en == mc.thePlayer || !this.isValid(en) || !(maxDistance > (yawdistance = getDistanceBetweenAngles(RotationUtils.getAngles(en)[1], mc.thePlayer.rotationYaw)))) {
 					continue;
 				}
 				entity = en;
@@ -145,8 +144,7 @@ public class AimAssist extends Module{
 			Vec3 var9 = var7.addVector(var8.xCoord * var3, var8.yCoord * var3, var8.zCoord * var3);
 			Vec3 var10 = null;
 			float var11 = 1.0f;
-			List var12 = mc.theWorld.getEntitiesWithinAABBExcludingEntity(entityView, entityView.getEntityBoundingBox()
-					.addCoord(var8.xCoord * var3, var8.yCoord * var3, var8.zCoord * var3).expand(var11, var11, var11));
+			List<?> var12 = mc.theWorld.getEntitiesWithinAABBExcludingEntity(entityView, entityView.getEntityBoundingBox().addCoord(var8.xCoord * var3, var8.yCoord * var3, var8.zCoord * var3).expand(var11, var11, var11));
 			double var13 = var5;
 			for (int var15 = 0; var15 < var12.size(); ++var15) {
 				double var20;

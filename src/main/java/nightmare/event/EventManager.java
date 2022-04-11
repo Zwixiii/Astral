@@ -4,10 +4,11 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class EventManager {
 
-	private Map<Class<? extends Event>, ArrayHelper<Data>> REGISTRY_MAP = new HashMap();
+	private Map<Class<?>, ArrayHelper<Data>> REGISTRY_MAP = new HashMap<Class<?>, ArrayHelper<Data>>();
 
 	public void register(Object o) {
 
@@ -26,6 +27,7 @@ public class EventManager {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private void register(Method method, Object o) {
 		Class<?> clazz = method.getParameterTypes()[0];
 		final Data methodData = new Data(o, method, method.getAnnotation(EventTarget.class).value());
@@ -75,7 +77,7 @@ public class EventManager {
 
 	public void cleanMap(boolean b) {
 
-		Iterator<Map.Entry<Class<? extends Event>, ArrayHelper<Data>>> iterator = REGISTRY_MAP.entrySet().iterator();
+		Iterator<Entry<Class<?>, ArrayHelper<Data>>> iterator = REGISTRY_MAP.entrySet().iterator();
 
 		while (iterator.hasNext()) {
 			if (!b || iterator.next().getValue().isEmpty()) {
@@ -86,7 +88,7 @@ public class EventManager {
 
 	public void removeEnty(Class<? extends Event> clazz) {
 
-		Iterator<Map.Entry<Class<? extends Event>, ArrayHelper<Data>>> iterator = REGISTRY_MAP.entrySet().iterator();
+		Iterator<Entry<Class<?>, ArrayHelper<Data>>> iterator = REGISTRY_MAP.entrySet().iterator();
 
 		while (iterator.hasNext()) {
 			if (iterator.next().getKey().equals(clazz)) {

@@ -1,7 +1,5 @@
 package nightmare.clickgui.component.components.sub;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import nightmare.clickgui.component.Component;
 import nightmare.clickgui.component.components.Button;
@@ -11,23 +9,18 @@ import nightmare.settings.Setting;
 import nightmare.utils.ColorUtils;
 
 public class ModeButton extends Component {
-
-	private boolean hovered;
+	
 	private Button parent;
 	private Setting set;
 	private int offset;
 	private int x;
 	private int y;
-	private Module mod;
 
 	private int modeIndex;
-	
-	private FontRenderer fr = Minecraft.getMinecraft().fontRendererObj;
 	
 	public ModeButton(Setting set, Button button, Module mod, int offset) {
 		this.set = set;
 		this.parent = button;
-		this.mod = mod;
 		this.x = button.frame.getX() + button.frame.getWidth();
 		this.y = button.frame.getY() + button.offset;
 		this.offset = offset;
@@ -43,12 +36,11 @@ public class ModeButton extends Component {
 	public void renderComponent() {
 		Gui.drawRect(parent.frame.getX(), parent.frame.getY() + offset, parent.frame.getX() + (parent.frame.getWidth() * 1), parent.frame.getY() + offset + 18, ColorUtils.getBackgroundColor());
 		
-		Fonts.REGULAR.REGULAR_20.REGULAR_20.drawString("Mode: " + set.getValString(), (parent.frame.getX() + 7), (parent.frame.getY() + offset + 2) + 5, -1);
+		Fonts.REGULAR.REGULAR_20.REGULAR_20.drawString(set.getName() + ": " + set.getValString(), (parent.frame.getX() + 7), (parent.frame.getY() + offset + 2) + 5, -1);
 	}
 	
 	@Override
 	public void updateComponent(int mouseX, int mouseY) {
-		this.hovered = isMouseOnButton(mouseX, mouseY);
 		this.y = parent.frame.getY() + offset;
 		this.x = parent.frame.getX();
 	}

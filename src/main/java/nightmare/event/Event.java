@@ -16,7 +16,7 @@ public abstract class Event {
 
 	public Event call() {
 		this.cancelled = false;
-		this.call(this);
+		Event.call(this);
 		return this;
 	}
 
