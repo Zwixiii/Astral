@@ -1,5 +1,6 @@
 package nightmare.module.combat;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -35,6 +36,11 @@ public class AimAssist extends Module{
 	public AimAssist() {
 		super("AimAssist", 0, Category.COMBAT);
 		
+		ArrayList<String> options = new ArrayList<>();
+		
+		options.add("Head");
+		options.add("Middle");
+		
 		Nightmare.instance.settingsManager.rSetting(new Setting("ClickAim", this, false));
 		Nightmare.instance.settingsManager.rSetting(new Setting("BreakBlock", this, false));
 		Nightmare.instance.settingsManager.rSetting(new Setting("HeldItem", this, false));
@@ -44,6 +50,7 @@ public class AimAssist extends Module{
 		Nightmare.instance.settingsManager.rSetting(new Setting("FOV", this, 100, 20, 360, false));
 		Nightmare.instance.settingsManager.rSetting(new Setting("Strafe", this, false));
 		Nightmare.instance.settingsManager.rSetting(new Setting("Team", this, false));
+		Nightmare.instance.settingsManager.rSetting(new Setting("Mode", this, "Middle", options));
 	}
 
 	@EventTarget
@@ -121,8 +128,15 @@ public class AimAssist extends Module{
 		EntityPlayerSP player = mc.thePlayer;
 		float yaw = RotationUtils.getAngles(target)[1];
 		float pitch = RotationUtils.getAngles(target)[0];
+		String mode = Nightmare.instance.settingsManager.getSettingByName(this, "Mode").getValString();
+		
 		player.rotationYaw = RotationUtils.getRotation(player.rotationYaw, yaw, yawspeed);
-		player.rotationPitch = RotationUtils.getRotation(player.rotationPitch, pitch, pitchspeed);
+		
+		if(mode.equals("Head")) {
+			player.rotationPitch = RotationUtils.getRotation(player.rotationPitch, pitch - 12, pitchspeed);
+		}else {
+			player.rotationPitch = RotationUtils.getRotation(player.rotationPitch, pitch, pitchspeed);
+		}
 	}
 	
 	public static Entity getEntity(double distance) {
