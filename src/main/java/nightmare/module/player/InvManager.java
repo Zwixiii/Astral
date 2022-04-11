@@ -26,7 +26,7 @@ public class InvManager extends Module{
 
 	private TimerUtils timer = new TimerUtils();
     private List<Integer> allSwords = new ArrayList<Integer>();
-    @SuppressWarnings("rawtypes")
+	@SuppressWarnings("rawtypes")
 	private List[] allArmors = new List[4];
 	private List<Integer> trash = new ArrayList<Integer>();
 	private boolean cleaning;
@@ -61,7 +61,7 @@ public class InvManager extends Module{
             }
 
             for(int i = 0; i < trashSize; ++i) {
-               int slot = (Integer)this.trash.get(i);
+               int slot = this.trash.get(i);
                if (this.checkDelay()) {
                   break;
                }
@@ -172,7 +172,7 @@ public class InvManager extends Module{
       int i1 = 0;
 
       for(int allSwordsSize = this.allSwords.size(); i1 < allSwordsSize; ++i1) {
-         Integer slot = (Integer)this.allSwords.get(i1);
+         Integer slot = this.allSwords.get(i1);
          if (slot != this.bestSwordSlot) {
             integers.add(slot);
          }
