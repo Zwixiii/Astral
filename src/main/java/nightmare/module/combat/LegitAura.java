@@ -1,5 +1,6 @@
 package nightmare.module.combat;
 
+import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -33,6 +34,11 @@ public class LegitAura extends Module {
     public LegitAura() {
         super("LegitAura", 0, Category.COMBAT);
 
+		ArrayList<String> options = new ArrayList<>();
+		
+		options.add("Legit");
+		options.add("Normal");
+		
         Nightmare.instance.settingsManager.rSetting(new Setting("AutoDisable", this, false));
         Nightmare.instance.settingsManager.rSetting(new Setting("HeldItem", this, false));
 		Nightmare.instance.settingsManager.rSetting(new Setting("Horizontal", this, 12, 0, 30, false));
@@ -43,6 +49,7 @@ public class LegitAura extends Module {
         Nightmare.instance.settingsManager.rSetting(new Setting("FOV", this, 360, 0, 360, true));
         Nightmare.instance.settingsManager.rSetting(new Setting("Teams", this, false));
         Nightmare.instance.settingsManager.rSetting(new Setting("Invisibles", this, false));
+		Nightmare.instance.settingsManager.rSetting(new Setting("AttackMode", this, "Legit", options));
     }
 
     @EventTarget
@@ -50,6 +57,7 @@ public class LegitAura extends Module {
     	
     	float horizontalSpeed = (float) Nightmare.instance.settingsManager.getSettingByName(this, "Horizontal").getValDouble();
     	float verticalSpeed = (float) Nightmare.instance.settingsManager.getSettingByName(this, "Vertical").getValDouble();
+    	String mode = Nightmare.instance.settingsManager.getSettingByName(this, "AttackMode").getValString();
     	
         target = getClosest(Nightmare.instance.settingsManager.getSettingByName(this, "Range").getValDouble());
         
@@ -64,9 +72,15 @@ public class LegitAura extends Module {
             	
             	if (timer.delay(1000 / ThreadLocalRandom.current().nextInt((int) Nightmare.instance.settingsManager.getSettingByName(this, "MinCPS").getValDouble(), (int) Nightmare.instance.settingsManager.getSettingByName(this, "MaxCPS").getValDouble() + 1))) {
                     mc.thePlayer.swingItem();
-                	if(mc.objectMouseOver != null && mc.objectMouseOver.entityHit != null) {
-                        mc.playerController.attackEntity(mc.thePlayer, target);
-                	}
+                    
+                    if(mode.equals("Legit")) {
+                    	if(mc.objectMouseOver != null && mc.objectMouseOver.entityHit != null) {
+                            mc.playerController.attackEntity(mc.thePlayer, target);
+                    	}
+                    }else {
+                    	mc.playerController.attackEntity(mc.thePlayer, target);
+                    }
+                    
                     timer.reset();
             	}
             }
@@ -109,9 +123,7 @@ public class LegitAura extends Module {
     }
 
     private boolean canAttack(EntityLivingBase player) {
-    	if(player instanceof EntityVillager || player instanceof EntityArmorStand || player instanceof EntityAnimal || player instanceof EntityMob 
-    			|| player.getDisplayName().getFormattedText().contains("[NPC]") || player.getName().contains("#") || player.getName().toLowerCase().contains("shop"))
-    		return false;
+
         if(player.getDisplayName().getFormattedText().startsWith("\u00a7" + mc.thePlayer.getDisplayName().getFormattedText().charAt(1)) && !Nightmare.instance.settingsManager.getSettingByName(this, "Teams").getValBoolean())
             return false;
         if(player.isInvisible() && !Nightmare.instance.settingsManager.getSettingByName(this, "Invisibles").getValBoolean())
