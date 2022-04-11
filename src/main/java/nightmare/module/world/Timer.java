@@ -17,7 +17,7 @@ public class Timer extends Module{
 	public Timer() {
 		super("Timer", 0, Category.WORLD);
 		
-		Nightmare.instance.settingsManager.rSetting(new Setting("Timer", this, 1.5, 0.1, 10, false));
+		Nightmare.instance.settingsManager.rSetting(new Setting("Timer", this, 1.50, 0.10, 3, false));
 	}
 	
 	@EventTarget
