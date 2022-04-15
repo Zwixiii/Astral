@@ -13,6 +13,7 @@
 	 "entity.MixinEntityLivingBase",
 	 "entity.MixinEntityPlayer",
 	 "entity.MixinEntityPlayerSP",
+	 "gui.MixinGuiContainer",
 	 "gui.MixinGuiDownloadTerrain",
 	 "gui.MixinGuiIngame",
 	 "gui.MixinGuiNewChat",
