@@ -1,9 +1,12 @@
 package nightmare.module.render;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.ScaledResolution;
 import nightmare.Nightmare;
 import nightmare.event.EventTarget;
 import nightmare.event.impl.EventRender2D;
@@ -19,10 +22,13 @@ public class HUD extends Module{
 
 	private int stringWidth;
 	
+	private FontRenderer fr = mc.fontRendererObj;
+	
 	public HUD() {
 		super("HUD", 0, Category.RENDER);
 		
 		Nightmare.instance.settingsManager.rSetting(new Setting("ActiveMods", this, true));
+		Nightmare.instance.settingsManager.rSetting(new Setting("Background", this, true));
 		Nightmare.instance.settingsManager.rSetting(new Setting("ClientName", this, false));
 		Nightmare.instance.settingsManager.rSetting(new Setting("Inventory", this, true));
 		Nightmare.instance.settingsManager.rSetting(new Setting("Notification", this, true));
@@ -48,5 +54,35 @@ public class HUD extends Module{
 		if(Nightmare.instance.settingsManager.getSettingByName(this, "Notification").getValBoolean()) {
 			NotificationManager.doRender(ScreenUtils.getWidth(), ScreenUtils.getHeight());
 		}
+		
+		if(Nightmare.instance.settingsManager.getSettingByName(this, "ActiveMods").getValBoolean()) {
+			this.renderActiveMods();
+		}
+	}
+	
+	private void renderActiveMods() {
+		
+        final ArrayList<Module> enabledMods = new ArrayList<Module>();
+        final ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
+        int moduleY = 0;
+        
+        for (final Module m : Nightmare.instance.moduleManager.getModules()) {
+            if (m.isToggled()) {
+                enabledMods.add(m);
+            }
+        }
+        
+        enabledMods.sort((m1, m2) ->  Fonts.REGULAR.REGULAR_20.REGULAR_20.getStringWidth(m2.getDisplayName()) - Fonts.REGULAR.REGULAR_20.REGULAR_20.getStringWidth(m1.getDisplayName()));
+        
+        for (final Module m : enabledMods) {
+        	
+        	if(Nightmare.instance.settingsManager.getSettingByName(this, "Background").getValBoolean()) {
+        		Gui.drawRect(sr.getScaledWidth() - Fonts.REGULAR.REGULAR_20.REGULAR_20.getStringWidth(m.getDisplayName()) - 6, moduleY * (fr.FONT_HEIGHT + 2), sr.getScaledWidth(), 2 + fr.FONT_HEIGHT + moduleY * (fr.FONT_HEIGHT + 2), ColorUtils.getBackgroundColor());
+        	}
+        	
+        	Fonts.REGULAR.REGULAR_20.REGULAR_20.drawString(m.getDisplayName(), sr.getScaledWidth() - Fonts.REGULAR.REGULAR_20.REGULAR_20.getStringWidth(m.getDisplayName()) - 4, 2 + moduleY * (fr.FONT_HEIGHT + 2), ColorUtils.getClientColor(), true);
+        	
+        	moduleY++;
+        }
 	}
 }
