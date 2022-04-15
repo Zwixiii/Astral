@@ -9,7 +9,6 @@ import nightmare.event.EventTarget;
 import nightmare.event.impl.EventRender2D;
 import nightmare.fonts.impl.Fonts;
 import nightmare.gui.notification.NotificationManager;
-import nightmare.gui.window.Window;
 import nightmare.module.Category;
 import nightmare.module.Module;
 import nightmare.settings.Setting;

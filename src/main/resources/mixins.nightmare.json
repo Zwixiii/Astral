@@ -10,6 +10,7 @@
      "block.MixinBlock",
 	 "client.MixinMinecraft",
 	 "entity.MixinEntity",
+	 "entity.MixinEntityLivingBase",
 	 "entity.MixinEntityPlayer",
 	 "entity.MixinEntityPlayerSP",
 	 "gui.MixinGuiDownloadTerrain",
@@ -23,6 +24,7 @@
 	 "render.MixinRendererLivingEntity",
 	 "render.MixinRenderItem",
 	 "render.MixinTileEntityChestRenderer",
+	 "settings.MixinGameSettings",
 	 "world.MixinWorldInfo"
   ]
 }
