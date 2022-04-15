@@ -58,6 +58,12 @@ public class ClickGUI extends GuiScreen {
 			}
 		}
 		
+		for(Window window : Nightmare.instance.windowManager.getWindows()) {
+			if(Nightmare.instance.settingsManager.getSettingByName(Nightmare.instance.moduleManager.getModuleByName("HUD"), window.getName()).getValBoolean()) {
+				Nightmare.instance.windowManager.getWindowByName(window.getName()).onRender();
+			}
+		}
+		
     	for(Window window : Nightmare.instance.windowManager.getWindows()) {
     		
     		if(!window.isShowWindow()) {
@@ -73,7 +79,7 @@ public class ClickGUI extends GuiScreen {
     			window.setHeight(mouseY + window.getDraggingHeight());
     		}
     	}
-    	
+		
 		super.drawScreen(mouseX, mouseY, partialTicks);
 	}
     

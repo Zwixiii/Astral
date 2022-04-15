@@ -49,11 +49,5 @@ public class HUD extends Module{
 		if(Nightmare.instance.settingsManager.getSettingByName(this, "Notification").getValBoolean()) {
 			NotificationManager.doRender(ScreenUtils.getWidth(), ScreenUtils.getHeight());
 		}
-		
-		for(Window window : Nightmare.instance.windowManager.getWindows()) {
-			if(Nightmare.instance.settingsManager.getSettingByName(this, window.getName()).getValBoolean()) {
-				Nightmare.instance.windowManager.getWindowByName(window.getName()).onRender();
-			}
-		}
 	}
 }
