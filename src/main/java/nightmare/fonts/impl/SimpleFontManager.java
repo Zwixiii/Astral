@@ -22,7 +22,7 @@ public final class SimpleFontManager implements FontManager {
 		return new SimpleFontManager();
 	}
 	
-	private static final String FONT_DIRECTORY = "moonlight/fonts/";
+	private static final String FONT_DIRECTORY = "nightmare/fonts/";
 	private final FontRegistry fonts = new FontRegistry();
 
 	@Override

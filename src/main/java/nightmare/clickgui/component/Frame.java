@@ -69,11 +69,29 @@ public class Frame {
 	
 	public void renderFrame(FontRenderer fontRenderer) {
 		
+		String icon = "";
+		
 		Gui.drawRect(this.x, this.y - 4, this.x + this.width, this.y + this.barHeight, ColorUtils.getClientColor());
 		
-		Fonts.REGULAR.REGULAR_20.REGULAR_20.drawString(this.category.name().replace("COMBAT", "Combat").replace("MOVEMENT", "Movement").replace("RENDER", "Render").replace("PLAYER", "Player").replace("WORLD", "World").replace("MISC", "Misc"), this.x + 2, (this.y) + 2, -1);
+		Fonts.REGULAR.REGULAR_20.REGULAR_20.drawString(this.category.name().replace("COMBAT", "Combat").replace("MOVEMENT", "Movement").replace("RENDER", "Render").replace("PLAYER", "Player").replace("WORLD", "World").replace("MISC", "Misc"), this.x + 14, (this.y) + 2, -1);
 		Fonts.REGULAR.REGULAR_20.REGULAR_20.drawString(this.open ? "-" : "+", this.x + 89, (this.y) + 1, -1);
 
+		if(category.equals(Category.COMBAT)) {
+			icon = "G";
+		}else if(category.equals(Category.MOVEMENT)) {
+			icon = "H";
+		}else if(category.equals(Category.RENDER)) {
+			icon = "J";
+		}else if(category.equals(Category.PLAYER)) {
+			icon = "I";
+		}else if(category.equals(Category.WORLD)) {
+			icon = "K";
+		}else if(category.equals(Category.MISC)) {
+			icon = "L";
+		}
+		
+		Fonts.ICON.ICON_20.ICON_20.drawString(icon, this.x + 2, this.y + 2.6F, -1);
+		
 		if(this.open) {
 			if(!this.components.isEmpty()) {
 				for(Component component : components) {
