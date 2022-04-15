@@ -14,8 +14,7 @@ public class Notification {
 	
     public static Minecraft mc = Minecraft.getMinecraft();
     
-    public String message;
-    public String title;
+    public String message, title, icon;
     private NotificationType notificationType;
     private TimerUtils timer;
     private float animationX;
@@ -59,12 +58,16 @@ public class Notification {
 
         if(notificationType.equals(NotificationType.INFO)) {
         	notificationColor = new Color(220, 220, 220).getRGB();
+        	icon = "F";
         }else if(notificationType.equals(NotificationType.SUCCESS)) {
         	notificationColor = new Color(80, 200, 150).getRGB();
+        	icon = "A";
         }else if(notificationType.equals(NotificationType.WARNING)) {
         	notificationColor = new Color(220, 220, 100).getRGB();
+        	icon = "C";
         }else if(notificationType.equals(NotificationType.ERROR)) {
         	notificationColor = new Color(250, 55, 55).getRGB();
+        	icon = "B";
         }
         
         animationX = AnimationUtils.setAnimation(this.animationX, target, (Math.max(10, (Math.abs(this.animationX - (target))) * 40) * 0.4f));
@@ -83,6 +86,7 @@ public class Notification {
         RenderUtils.drawRect(x1 + 35, y2 - 1, (x1 + 35) + (f2 * (width - 29)), y2, notificationColor);
         Fonts.REGULAR.REGULAR_20.REGULAR_20.drawString(this.title, x1 + 40, y1 + 3, -1);
         Fonts.REGULAR.REGULAR_16.REGULAR_16.drawString(this.message, x1 + 40, y1 + 14, -1);
+        Fonts.ICON.ICON_16.ICON_16.drawString(this.icon, x1 + Fonts.REGULAR.REGULAR_20.REGULAR_20.getStringWidth(this.title) + 41.5F, y1 + 5, notificationColor);
     }
 
     public boolean shouldDelete() {
