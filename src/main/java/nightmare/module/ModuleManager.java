@@ -9,6 +9,7 @@ import nightmare.module.combat.BowAimAssist;
 import nightmare.module.combat.HitBox;
 import nightmare.module.combat.LegitAura;
 import nightmare.module.combat.Reach;
+import nightmare.module.combat.TriggerBot;
 import nightmare.module.combat.Velocity;
 import nightmare.module.misc.BlatantMode;
 import nightmare.module.misc.FPSBoost;
@@ -58,6 +59,7 @@ public class ModuleManager {
     	modules.add(new Reach());
     	modules.add(new HitBox());
     	modules.add(new LegitAura());
+    	modules.add(new TriggerBot());
     	modules.add(new Velocity());
     	
     	//Movement
