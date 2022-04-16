@@ -126,7 +126,7 @@ public class LegitAura extends Module {
     	if(player instanceof EntityVillager || player instanceof EntityArmorStand || player instanceof EntityAnimal || player instanceof EntityMob 
     			|| player.getDisplayName().getFormattedText().contains("[NPC]") || player.getName().contains("#") || player.getName().toLowerCase().contains("shop"))
     		return false;
-        if(player.getDisplayName().getFormattedText().startsWith("\u00a7" + mc.thePlayer.getDisplayName().getFormattedText().charAt(1)) && !Nightmare.instance.settingsManager.getSettingByName(this, "Teams").getValBoolean())
+        if(Nightmare.instance.settingsManager.getSettingByName(this, "Teams").getValBoolean() && player.isOnSameTeam(mc.thePlayer))
             return false;
         if(player.isInvisible() && !Nightmare.instance.settingsManager.getSettingByName(this, "Invisibles").getValBoolean())
             return false;
