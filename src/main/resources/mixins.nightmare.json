@@ -6,6 +6,7 @@
   "client": [
      "accessor.KeyBindingAccessor",
      "accessor.MinecraftAccessor",
+     "accessor.RenderManagerAccessor",
      "accessor.ShaderGroupAccessor",
      "block.MixinBlock",
 	 "client.MixinMinecraft",
