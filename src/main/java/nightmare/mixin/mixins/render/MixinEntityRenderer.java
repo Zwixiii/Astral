@@ -26,6 +26,7 @@ import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import nightmare.Nightmare;
+import nightmare.event.impl.EventRender3D;
 import nightmare.module.combat.Reach;
 import nightmare.utils.motionblur.MotionBlurUtils;
 
@@ -170,5 +171,11 @@ public class MixinEntityRenderer {
 
             this.mc.mcProfiler.endSection();
         }
+    }
+    
+    @Inject(method = "renderWorldPass", at = @At(value = "FIELD", target = "Lnet/minecraft/client/renderer/EntityRenderer;renderHand:Z", shift = At.Shift.BEFORE))
+    private void renderWorldPass(int pass, float partialTicks, long finishTimeNano, CallbackInfo ci) {
+    	EventRender3D event = new EventRender3D(partialTicks);
+    	event.call();
     }
 }

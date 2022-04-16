@@ -13,8 +13,6 @@ import nightmare.gui.window.Window;
 import nightmare.module.Category;
 import nightmare.utils.ColorUtils;
 import nightmare.utils.MouseUtils;
-import nightmare.utils.ScreenUtils;
-import nightmare.utils.render.BlurUtils;
 
 public class ClickGUI extends GuiScreen {
 
