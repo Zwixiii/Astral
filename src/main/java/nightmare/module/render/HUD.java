@@ -13,6 +13,7 @@ import nightmare.event.EventTarget;
 import nightmare.event.impl.EventRender2D;
 import nightmare.fonts.impl.Fonts;
 import nightmare.gui.notification.NotificationManager;
+import nightmare.gui.window.Window;
 import nightmare.module.Category;
 import nightmare.module.Module;
 import nightmare.settings.Setting;
@@ -65,6 +66,14 @@ public class HUD extends Module{
 		
 		if(Nightmare.instance.settingsManager.getSettingByName(this, "Notification").getValBoolean()) {
 			NotificationManager.doRender(ScreenUtils.getWidth(), ScreenUtils.getHeight());
+		}
+		
+		if(!(mc.currentScreen instanceof ClickGUI)) {
+			for(Window window : Nightmare.instance.windowManager.getWindows()) {
+				if(Nightmare.instance.settingsManager.getSettingByName(this, window.getName()).getValBoolean()) {
+					Nightmare.instance.windowManager.getWindowByName(window.getName()).onRender();
+				}
+			}
 		}
 	}
 	
