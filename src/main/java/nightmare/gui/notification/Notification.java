@@ -4,10 +4,12 @@ import java.awt.Color;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.MathHelper;
+import nightmare.Nightmare;
 import nightmare.fonts.impl.Fonts;
 import nightmare.utils.AnimationUtils;
 import nightmare.utils.ColorUtils;
 import nightmare.utils.TimerUtils;
+import nightmare.utils.render.BlurUtils;
 import nightmare.utils.render.RenderUtils;
 
 public class Notification {
@@ -81,6 +83,10 @@ public class Notification {
         
         float f1 = MathHelper.clamp_float(timer.getCurrentMS() - timer.getLastMS(), 0, delay);
         float f2 = f1 / delay;
+        
+        if(Nightmare.instance.moduleManager.getModuleByName("Blur").isToggled() && Nightmare.instance.settingsManager.getSettingByName(Nightmare.instance.moduleManager.getModuleByName("Blur"), "Notification").getValBoolean()) {
+        	BlurUtils.drawBlurRect(x1 + 35, y1, x2, y2);
+        }
         
         RenderUtils.drawRect(x1 + 35, y1, x2, y2, ColorUtils.getBackgroundColor());
         RenderUtils.drawRect(x1 + 35, y2 - 1, (x1 + 35) + (f2 * (width - 29)), y2, notificationColor);

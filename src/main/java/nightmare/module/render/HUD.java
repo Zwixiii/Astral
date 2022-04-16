@@ -8,6 +8,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 import nightmare.Nightmare;
+import nightmare.clickgui.ClickGUI;
 import nightmare.event.EventTarget;
 import nightmare.event.impl.EventRender2D;
 import nightmare.fonts.impl.Fonts;
@@ -17,6 +18,7 @@ import nightmare.module.Module;
 import nightmare.settings.Setting;
 import nightmare.utils.ColorUtils;
 import nightmare.utils.ScreenUtils;
+import nightmare.utils.render.BlurUtils;
 
 public class HUD extends Module{
 
@@ -51,12 +53,18 @@ public class HUD extends Module{
 			Fonts.REGULAR.REGULAR_18.REGULAR_18.drawString(title, 8 + 3, 8 + 3, -1, true);
 		}
 		
-		if(Nightmare.instance.settingsManager.getSettingByName(this, "Notification").getValBoolean()) {
-			NotificationManager.doRender(ScreenUtils.getWidth(), ScreenUtils.getHeight());
-		}
-		
 		if(Nightmare.instance.settingsManager.getSettingByName(this, "ActiveMods").getValBoolean()) {
 			this.renderActiveMods();
+		}
+		
+		if(Nightmare.instance.moduleManager.getModuleByName("Blur").isToggled() && Nightmare.instance.settingsManager.getSettingByName(Nightmare.instance.moduleManager.getModuleByName("Blur"), "ClickGUI").getValBoolean()) {
+			if(mc.currentScreen instanceof ClickGUI) {
+				BlurUtils.drawBlurRect(0, 0, ScreenUtils.getWidth(), ScreenUtils.getHeight());
+			}
+		}
+		
+		if(Nightmare.instance.settingsManager.getSettingByName(this, "Notification").getValBoolean()) {
+			NotificationManager.doRender(ScreenUtils.getWidth(), ScreenUtils.getHeight());
 		}
 	}
 	
