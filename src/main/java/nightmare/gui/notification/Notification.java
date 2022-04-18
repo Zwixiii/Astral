@@ -53,7 +53,7 @@ public class Notification {
     public void draw(float x, float offsetY) {
     	
         float target = isFinished() ? width : 0;
-
+        
         if (animationY == 0) {
             animationY = offsetY;
         }

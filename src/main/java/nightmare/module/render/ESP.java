@@ -40,7 +40,7 @@ public class ESP extends Module{
             }
             
             if(this.isValid(entity)) {
-            	Render3DUtils.drawBox(posX, posY, posZ, 0.4, entity.getEntityBoundingBox().maxY - entity.getEntityBoundingBox().minY, (float) Nightmare.instance.settingsManager.getSettingByName(this, "LineWidth").getValDouble(), ColorUtils.getClientColorRaw().getRed(), ColorUtils.getClientColorRaw().getGreen(), ColorUtils.getClientColorRaw().getBlue(), 255);
+            	Render3DUtils.drawBox(posX, posY, posZ, 0.4, entity.getEntityBoundingBox().maxY - entity.getEntityBoundingBox().minY, (float) Nightmare.instance.settingsManager.getSettingByName(this, "LineWidth").getValDouble(), ColorUtils.getClientColor());
             }
 		}
 	}

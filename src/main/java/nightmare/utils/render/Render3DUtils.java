@@ -9,7 +9,13 @@ import net.minecraft.util.AxisAlignedBB;
 
 public class Render3DUtils {
 
-    public static void drawBox(double x, double y, double z, double width, double height, float lineWidth, float red,float green, float blue, float alpha) {
+    public static void drawBox(double x, double y, double z, double width, double height, float lineWidth, int color) {
+    	
+        float f = (color >> 24 & 0xFF) / 255.0F;
+        float f1 = (color >> 16 & 0xFF) / 255.0F;
+        float f2 = (color >> 8 & 0xFF) / 255.0F;
+        float f3 = (color & 0xFF) / 255.0F;
+        
 		GL11.glPushMatrix();
 		GL11.glEnable(3042);
 		GL11.glBlendFunc(770, 771);
@@ -18,7 +24,7 @@ public class Render3DUtils {
 		GL11.glDisable(2929);
 		GL11.glDepthMask(false);
 		GL11.glLineWidth(lineWidth);
-		GL11.glColor4f(red, green, blue, alpha);
+		GL11.glColor4f(f1, f2, f3, f);
 		drawOutlinedBoundingBox(new AxisAlignedBB(x - width, y, z - width, x + width, y + height, z + width));
 		GL11.glDisable(2848);
 		GL11.glEnable(3553);

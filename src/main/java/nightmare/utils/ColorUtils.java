@@ -12,8 +12,4 @@ public class ColorUtils {
 	public static int getClientColor() {
 		return new Color((int) Nightmare.instance.settingsManager.getSettingByName(Nightmare.instance.moduleManager.getModuleByName("HUD"), "Red").getValDouble(), (int) Nightmare.instance.settingsManager.getSettingByName(Nightmare.instance.moduleManager.getModuleByName("HUD"), "Green").getValDouble(), (int) Nightmare.instance.settingsManager.getSettingByName(Nightmare.instance.moduleManager.getModuleByName("HUD"), "Blue").getValDouble()).getRGB();
 	}
-	
-	public static Color getClientColorRaw() {
-		return new Color((int) Nightmare.instance.settingsManager.getSettingByName(Nightmare.instance.moduleManager.getModuleByName("HUD"), "Red").getValDouble(), (int) Nightmare.instance.settingsManager.getSettingByName(Nightmare.instance.moduleManager.getModuleByName("HUD"), "Green").getValDouble(), (int) Nightmare.instance.settingsManager.getSettingByName(Nightmare.instance.moduleManager.getModuleByName("HUD"), "Blue").getValDouble());
-	}
 }
