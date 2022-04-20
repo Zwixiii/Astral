@@ -10,8 +10,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import nightmare.event.impl.EventAttackEntity;
 
 @Mixin(EntityPlayer.class)
-public class MixinEntityPlayer {
-	
+public class MixinEntityPlayer{
+
 	@Inject(method = "attackTargetEntityWithCurrentItem", at = @At("HEAD"))
 	public void attackTargetEntityWithCurrentItem(Entity entity, CallbackInfo ci) {
 		if(entity.canAttackWithItem()) {

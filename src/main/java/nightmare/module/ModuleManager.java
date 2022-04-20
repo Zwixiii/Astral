@@ -21,6 +21,7 @@ import nightmare.module.movement.Blink;
 import nightmare.module.movement.FastBridge;
 import nightmare.module.movement.Flight;
 import nightmare.module.movement.GuiMove;
+import nightmare.module.movement.Speed;
 import nightmare.module.movement.Sprint;
 import nightmare.module.movement.VClip;
 import nightmare.module.player.AutoArmor;
@@ -67,6 +68,7 @@ public class ModuleManager {
     	modules.add(new FastBridge());
     	modules.add(new Flight());
     	modules.add(new GuiMove());
+    	modules.add(new Speed());
     	modules.add(new Sprint());
     	modules.add(new VClip());
     	
